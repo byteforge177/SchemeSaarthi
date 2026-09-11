@@ -1,0 +1,1970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SchemeSaarthi — Find government schemes you may be eligible for</title>
+<meta name="description" content="SchemeSaarthi explains government schemes in English, Hindi and Telugu, covers every Indian state and district, shows which eligibility rules matched, what is missing, and links every claim back to the official source.">
+<style>
+  :root{
+    --bg:#f3f5fb;
+    --card:#ffffff;
+    --ink:#101828;
+    --muted:#667085;
+    --line:#e6e9f0;
+    --brand:#1d4ed8;
+    --brand-2:#3b82f6;
+    --brand-dark:#172554;
+    --saffron:#f59e0b;
+    --green:#0f7a56;
+    --green-bg:#e7f6ef;
+    --amber:#b45309;
+    --amber-bg:#fef4e6;
+    --red:#b42318;
+    --red-bg:#fdeceb;
+    --radius:16px;
+    --radius-sm:11px;
+    --shadow:0 1px 2px rgba(16,24,40,.05);
+    --shadow-md:0 4px 14px rgba(16,24,40,.07);
+    --shadow-lg:0 12px 32px rgba(16,24,40,.10);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans","Noto Sans Devanagari","Noto Sans Telugu",Arial,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--brand)}
+  ::selection{background:#bfdbfe;color:var(--brand-dark)}
+  /* ---------- top bar ---------- */
+  .topbar{
+    position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-filter:saturate(180%) blur(10px);
+    border-bottom:1px solid var(--line);
+    padding:11px 18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  }
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px;letter-spacing:-.01em}
+  .logo{
+    width:32px;height:32px;border-radius:10px;flex:none;
+    background:linear-gradient(135deg,#1d4ed8,#f59e0b);
+    display:grid;place-items:center;color:#fff;font-size:15px;font-weight:800;
+    box-shadow:0 2px 8px rgba(29,78,216,.35);
+  }
+  .langs{margin-left:auto;display:flex;gap:3px;background:#eef1f8;padding:3px;border-radius:999px}
+  .langs button{
+    border:0;background:transparent;padding:7px 14px;border-radius:999px;
+    font-size:13px;font-weight:700;color:var(--muted);cursor:pointer;font-family:inherit;
+    transition:.15s;
+  }
+  .langs button:hover{color:var(--brand-dark)}
+  .langs button.active{background:#fff;color:var(--brand);box-shadow:0 1px 4px rgba(16,24,40,.16)}
+  /* ---------- hero ---------- */
+  .hero{
+    background:
+      radial-gradient(900px 300px at 85% -10%, rgba(245,158,11,.35), transparent 60%),
+      linear-gradient(150deg,#0f1f4d 0%,#1d4ed8 58%,#3b82f6 100%);
+    color:#fff;padding:36px 18px 40px;position:relative;overflow:hidden;
+  }
+  .hero-inner{max-width:920px;margin:0 auto;position:relative}
+  .hero h1{margin:0 0 9px;font-size:29px;line-height:1.25;letter-spacing:-.02em}
+  .hero p{margin:0;color:#dbeafe;font-size:14.5px;max-width:660px}
+  .trust{
+    display:flex;gap:10px;margin-top:18px;background:rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.24);padding:11px 13px;border-radius:12px;
+    font-size:12.5px;color:#eff6ff;max-width:720px;line-height:1.5;
+  }
+  /* ---------- layout ---------- */
+  .wrap{max-width:920px;margin:-18px auto 0;padding:0 18px 70px;position:relative}
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px;margin-top:16px;box-shadow:var(--shadow-md);
+  }
+  h2{margin:0 0 4px;font-size:19px;letter-spacing:-.01em}
+  h3{margin:0 0 10px;font-size:15px;letter-spacing:-.01em}
+  .sub{margin:0 0 18px;color:var(--muted);font-size:13px}
+  /* ---------- form ---------- */
+  .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+  @media(max-width:620px){.grid{grid-template-columns:1fr}}
+  .field label{display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;color:#344054;margin-bottom:6px}
+  .ficon{font-size:13px;flex:none;opacity:.9}
+  .field input,.field select{
+    width:100%;padding:11px 12px;border:1.5px solid #d8dce4;border-radius:var(--radius-sm);
+    font-size:14.5px;background:#fff;color:var(--ink);font-family:inherit;transition:.15s;
+    appearance:none;-webkit-appearance:none;
+  }
+  .field select{
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' stroke='%23667085' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+    background-repeat:no-repeat;background-position:right 12px center;padding-right:32px;
+  }
+  .field select:disabled{background-color:#f7f8fa;color:#98a2b3;cursor:not-allowed}
+  .field input:hover,.field select:hover{border-color:#b6bccb}
+  .field input:focus,.field select:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 4px rgba(29,78,216,.12)}
+  .field-district select:not(:disabled){border-color:#bcd0fb}
+  .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+  .btn{
+    border:0;border-radius:var(--radius-sm);padding:12px 20px;font-size:14.5px;font-weight:700;
+    cursor:pointer;font-family:inherit;transition:.15s;
+  }
+  .btn-primary{background:var(--brand);color:#fff;box-shadow:0 2px 10px rgba(29,78,216,.28)}
+  .btn-primary:hover{background:#1a43b8;transform:translateY(-1px);box-shadow:0 4px 14px rgba(29,78,216,.36)}
+  .btn-primary:active{transform:translateY(0)}
+  .btn-ghost{background:#fff;border:1.5px solid #d8dce4;color:#344054}
+  .btn-ghost:hover{background:#f9fafb;border-color:#b6bccb}
+  /* ---------- results summary ---------- */
+  .counts{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 10px}
+  .cnt{font-size:12.5px;font-weight:800;padding:6px 13px;border-radius:999px;border:1px solid transparent}
+  .c-green{background:var(--green-bg);color:var(--green)}
+  .c-amber{background:var(--amber-bg);color:var(--amber)}
+  .c-red{background:var(--red-bg);color:var(--red)}
+  .note{margin:0;font-size:12.5px;color:var(--muted)}
+  .empty{text-align:center;color:var(--muted);font-size:14px;padding:40px 18px}
+  /* ---------- groups ---------- */
+  .rgroup{margin-top:26px}
+  .gtitle{
+    font-size:12.5px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);
+    margin:0 0 4px;display:flex;align-items:center;gap:8px;
+  }
+  .gtitle::before{content:"";width:5px;height:5px;border-radius:50%;background:currentColor;flex:none}
+  .notwrap{margin-top:26px}
+  .notwrap>summary{
+    cursor:pointer;font-size:12.5px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;
+    color:var(--muted);list-style:none;padding:10px 0;transition:.15s;
+  }
+  .notwrap>summary:hover{color:#475467}
+  .notwrap>summary::-webkit-details-marker{display:none}
+  .notwrap>summary::before{content:"▸ ";color:var(--brand)}
+  .notwrap[open]>summary::before{content:"▾ "}
+  /* ---------- scheme card ---------- */
+  .scheme{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px;margin-top:12px;box-shadow:var(--shadow);transition:box-shadow .15s}
+  .scheme:hover{box-shadow:var(--shadow-md)}
+  .scheme.not{opacity:.92}
+  .shead{display:flex;gap:10px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
+  .sname{font-size:16.5px;font-weight:800;line-height:1.35;margin:0;flex:1 1 240px;letter-spacing:-.01em}
+  .badge{
+    display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:800;padding:5px 11px;border-radius:999px;
+    letter-spacing:.02em;white-space:nowrap;flex:none;
+  }
+  .badge::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+  .b-likely{background:var(--green-bg);color:var(--green)}
+  .b-possible{background:var(--amber-bg);color:var(--amber)}
+  .b-not{background:var(--red-bg);color:var(--red)}
+  .smeta{margin:9px 0 0;font-size:12.5px;color:var(--muted)}
+  .smeta b{color:#475467;font-weight:700}
+  .matchline{margin:14px 0 0;font-size:12.5px;font-weight:700;color:#475467;padding:7px 11px;background:#f8fafc;border-radius:8px;display:inline-block}
+  .sec{margin-top:18px}
+  .sec h4{
+    margin:0 0 9px;font-size:12px;font-weight:800;text-transform:uppercase;
+    letter-spacing:.06em;color:#475467;
+  }
+  /* conditions */
+  .cond{display:flex;gap:10px;padding:10px 12px;border-radius:10px;border:1px solid var(--line);margin-bottom:7px;background:#fff;transition:.15s}
+  .cond.pass{border-left:3px solid var(--green);background:#fbfefc}
+  .cond.fail{border-left:3px solid var(--red);background:#fffbfb}
+  .cond.unknown{border-left:3px solid var(--saffron);background:#fffdf6}
+  .cond-icon{font-weight:900;font-size:13px;width:16px;text-align:center;flex:none;line-height:1.5}
+  .cond.pass .cond-icon{color:var(--green)}
+  .cond.fail .cond-icon{color:var(--red)}
+  .cond.unknown .cond-icon{color:var(--amber)}
+  .cond-body{min-width:0;flex:1}
+  .cond-line{font-size:13.5px;font-weight:700}
+  .cond-req{font-size:12.5px;color:#475467;margin-top:2px}
+  .cond-src{font-size:11.5px;color:var(--muted);margin-top:3px}
+  /* lists */
+  ul.plain{margin:0;padding-left:18px;font-size:13.5px}
+  ul.plain li{margin-bottom:6px}
+  ol.steps{margin:0;padding-left:20px;font-size:13.5px}
+  ol.steps li{margin-bottom:6px;padding-left:2px}
+  .chk{display:flex;gap:9px;align-items:flex-start;font-size:13.5px;padding:8px 11px;border:1px solid var(--line);border-radius:9px;margin-bottom:6px;cursor:pointer;background:#fff;transition:.15s}
+  .chk:hover{border-color:#b6bccb;background:#fafbfd}
+  .chk input{margin:3px 0 0;flex:none;accent-color:var(--brand);width:15px;height:15px}
+  .docs-note{font-size:11.5px;color:var(--muted);margin-top:8px}
+  /* source box */
+  .sourcebox{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:13px;font-size:12.5px}
+  .srow{display:flex;gap:8px;justify-content:space-between;padding:4px 0;flex-wrap:wrap}
+  .srow span{color:var(--muted)}
+  .srow b{font-weight:700;text-align:right}
+  .apply{margin-top:12px;display:flex;gap:10px;flex-wrap:wrap}
+  /* why details */
+  .why{margin-top:16px;border-top:1px dashed var(--line);padding-top:14px}
+  .why>summary{
+    cursor:pointer;font-size:13px;font-weight:800;color:var(--brand);list-style:none;
+    display:inline-flex;align-items:center;gap:6px;
+  }
+  .why>summary:hover{color:#1a43b8}
+  .why>summary::-webkit-details-marker{display:none}
+  .why>summary::before{content:"❓"}
+  .why-body{margin-top:12px}
+  .why-lead{font-size:12.5px;color:var(--muted);margin:0 0 10px}
+  .why-row{border:1px solid var(--line);border-radius:10px;padding:11px;margin-bottom:8px;background:#fff}
+  .why-field{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:#475467}
+  .why-src{font-size:13px;font-style:italic;color:#344054;margin-top:5px}
+  .why-ref{font-size:11.5px;color:var(--muted);margin-top:4px}
+  .why-json{
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11.5px;
+    background:#f1f5f9;border-radius:7px;padding:7px 9px;margin-top:7px;color:#334155;
+    overflow-x:auto;white-space:pre;
+  }
+  /* footer */
+  .foot{max-width:920px;margin:0 auto;padding:8px 18px 44px;font-size:12px;color:var(--muted);text-align:center}
+  .foot strong{color:#475467}
+  /* misc animation */
+  @media(prefers-reduced-motion:no-preference){
+    .scheme, .card{animation:fadeUp .35s ease both}
+  }
+  @keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  /* ---------- api key control ---------- */
+  .keybtn{
+    border:1px solid var(--line);background:#fff;color:#344054;font-size:12.5px;font-weight:700;
+    padding:7px 13px;border-radius:999px;cursor:pointer;font-family:inherit;transition:.15s;
+    display:flex;align-items:center;gap:6px;
+  }
+  .keybtn:hover{border-color:#b6bccb;background:#f9fafb}
+  .keybtn.connected{border-color:var(--green);color:var(--green);background:var(--green-bg)}
+  #apiKeyDialog{
+    border:none;border-radius:var(--radius);padding:0;box-shadow:var(--shadow-lg);
+    max-width:420px;width:92vw;
+  }
+  #apiKeyDialog::backdrop{background:rgba(16,24,40,.45);backdrop-filter:blur(2px)}
+  .keyform{padding:22px}
+  .keyform h3{margin:0 0 8px;font-size:17px}
+  .keyform label{display:block;font-size:12.5px;font-weight:700;color:#344054;margin:14px 0 6px}
+  .keyform input{
+    width:100%;padding:11px 12px;border:1.5px solid #d8dce4;border-radius:var(--radius-sm);
+    font-size:13.5px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  .keyform input:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 4px rgba(29,78,216,.12)}
+  .keyhelp{font-size:12px;color:var(--muted);margin:9px 0 0}
+  .keyactions{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+  /* ---------- live stats panel ---------- */
+  .statspanel{
+    margin-top:10px;border:1px dashed #bcd0fb;border-radius:11px;padding:12px;background:#f5f8ff;
+  }
+  .statspanel .stitle{
+    display:flex;align-items:center;gap:7px;font-size:12px;font-weight:800;color:var(--brand-dark);
+    text-transform:uppercase;letter-spacing:.05em;margin:0 0 8px;
+  }
+  .statspanel .stitle::before{content:"📊"}
+  .statsrow{display:flex;justify-content:space-between;gap:10px;font-size:13px;padding:5px 0;border-bottom:1px dashed #dbe4fb}
+  .statsrow:last-of-type{border-bottom:none}
+  .statsrow span{color:#475467}
+  .statsrow b{color:var(--brand-dark)}
+  .stats-note{font-size:11px;color:var(--muted);margin-top:8px}
+  .stats-empty{font-size:12.5px;color:var(--muted);margin:0}
+  .stats-cta{font-size:12.5px;color:var(--muted);margin:0}
+  .stats-cta button{background:none;border:0;color:var(--brand);font-weight:700;cursor:pointer;padding:0;font-family:inherit;font-size:12.5px}
+  .stats-cta button:hover{text-decoration:underline}
+  .stats-loading{font-size:12.5px;color:var(--muted);margin:0;display:flex;align-items:center;gap:8px}
+  .spin{width:13px;height:13px;border-radius:50%;border:2px solid #c7d6fb;border-top-color:var(--brand);animation:spin .7s linear infinite;flex:none}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .stats-error{font-size:12.5px;color:var(--red)}
+  /* ---------- topbar action group ---------- */
+  .topactions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .keybtn.subtle{color:#475467}
+  /* ---------- feature chips (hero) ---------- */
+  .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+  .chip{
+    font-size:11.5px;font-weight:700;color:#eff6ff;background:rgba(255,255,255,.14);
+    border:1px solid rgba(255,255,255,.28);padding:6px 12px;border-radius:999px;
+  }
+  /* ---------- key dialog sections ---------- */
+  .keysection{border-top:1px dashed var(--line);margin-top:16px;padding-top:14px}
+  .keysection:first-of-type{border-top:none;margin-top:6px;padding-top:0}
+  .keysection h4{margin:0 0 4px;font-size:13.5px;font-weight:800;color:var(--brand-dark);display:flex;align-items:center;gap:6px}
+  .keysection .keysub{margin:0 0 10px;font-size:12px;color:var(--muted)}
+  /* ---------- profiles dialog ---------- */
+  #profilesDialog{border:none;border-radius:var(--radius);padding:0;box-shadow:var(--shadow-lg);max-width:460px;width:92vw}
+  #profilesDialog::backdrop{background:rgba(16,24,40,.45);backdrop-filter:blur(2px)}
+  .savebar{display:flex;gap:8px;margin-top:6px}
+  .savebar input{flex:1}
+  .profile-list{margin-top:16px;display:flex;flex-direction:column;gap:8px;max-height:260px;overflow-y:auto}
+  .profile-row{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+    border:1px solid var(--line);border-radius:11px;padding:10px 12px;background:#f8fafc;
+  }
+  .profile-name{font-size:13.5px;font-weight:800;color:var(--ink)}
+  .profile-meta{font-size:11px;color:var(--muted);margin-top:2px}
+  .profile-actions{display:flex;gap:6px;flex:none}
+  .btn-sm{padding:7px 12px;font-size:12.5px;border-radius:9px}
+  .btn-sm.danger{color:var(--red);border-color:#f3c9c4}
+  .btn-sm.danger:hover{background:var(--red-bg)}
+  /* ---------- web search result panel ---------- */
+  .searchresult{padding:7px 0;border-bottom:1px dashed #dbe4fb}
+  .searchresult:last-of-type{border-bottom:none}
+  .searchresult a{font-size:13px;font-weight:700;text-decoration:none}
+  .searchresult a:hover{text-decoration:underline}
+  .searchresult p{margin:3px 0 0;font-size:12px;color:#475467;line-height:1.4}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="logo">सा</span>
+    <span data-i18n="appName">SchemeSaarthi</span>
+  </div>
+  <div class="langs" role="group" aria-label="Language">
+    <button type="button" data-lang="en" class="active">English</button>
+    <button type="button" data-lang="hi">हिंदी</button>
+    <button type="button" data-lang="te">తెలుగు</button>
+  </div>
+  <div class="topactions">
+    <button type="button" id="profilesBtn" class="keybtn subtle" data-i18n="profilesBtn">👤 My profiles</button>
+    <button type="button" id="apiKeyBtn" class="keybtn" data-i18n="apiKeyBtn">🔑 Connect live data</button>
+  </div>
+</header>
+
+<dialog id="apiKeyDialog">
+  <form method="dialog" class="keyform">
+    <h3 data-i18n="apiKeyDialogTitle">Connect live data</h3>
+    <p class="sub" data-i18n="apiKeyDialogDesc">Both connections are optional. Keys are kept only in this browser tab for this session and are never sent anywhere except the official endpoint named below.</p>
+
+    <div class="keysection">
+      <h4>📊 <span data-i18n="apiKeyTitle">Connect data.gov.in</span></h4>
+      <p class="keysub" data-i18n="apiKeyDesc">Paste your free data.gov.in API key to show live official statistics inside each matching scheme card. Your key is stored only in this browser tab and is never sent anywhere except api.data.gov.in.</p>
+      <label for="apiKeyInput" data-i18n="apiKeyLabel">API key</label>
+      <input type="text" id="apiKeyInput" placeholder="579b464db66ec23bdd0000xxxxxxxxxxxxxxxxxxxxxxxxx" autocomplete="off">
+      <p class="keyhelp"><span data-i18n="apiKeyHelp">Don't have one?</span> <a href="https://www.data.gov.in/user/register" target="_blank" rel="noopener" data-i18n="apiKeyGet">Register free at data.gov.in ↗</a></p>
+    </div>
+
+    <div class="keysection">
+      <h4>🌐 <span data-i18n="searchKeyTitle">Connect web search</span></h4>
+      <p class="keysub" data-i18n="searchKeyDesc">Add a free Google Programmable Search API key and Search Engine ID to pull live web results — news, updates and deadlines — into each scheme card.</p>
+      <label for="searchKeyInput" data-i18n="searchKeyLabel">API key</label>
+      <input type="text" id="searchKeyInput" placeholder="AIzaSyxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" autocomplete="off">
+      <label for="searchCxInput" data-i18n="searchCxLabel">Search engine ID (cx)</label>
+      <input type="text" id="searchCxInput" placeholder="a1b2c3d4e5f6g7h8i" autocomplete="off">
+      <p class="keyhelp"><span data-i18n="searchKeyHelp">Don't have one?</span> <a href="https://programmablesearchengine.google.com/" target="_blank" rel="noopener" data-i18n="searchKeyGet">Create a free search engine ↗</a></p>
+    </div>
+
+    <div class="keyactions">
+      <button type="submit" class="btn btn-primary" id="apiKeySave" data-i18n="apiKeySave">Save</button>
+      <button type="button" class="btn btn-ghost" id="apiKeyClear" data-i18n="apiKeyClear">Remove keys</button>
+      <button type="button" class="btn btn-ghost" id="apiKeyClose" data-i18n="apiKeyCloseBtn">Close</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="profilesDialog">
+  <form method="dialog" class="keyform" id="profilesForm">
+    <h3 data-i18n="profilesTitle">Save & switch profiles</h3>
+    <p class="sub" data-i18n="profilesDesc">Save your current answers under a name so you, or a family member, can reload them later. Saved profiles stay only on this device.</p>
+    <label for="profileNameInput" data-i18n="profileNameLabel">Profile name</label>
+    <div class="savebar">
+      <input type="text" id="profileNameInput" data-i18n-ph="profileNamePh" placeholder="e.g. My profile / Mother's profile" autocomplete="off">
+      <button type="button" class="btn btn-primary" id="profileSaveBtn" data-i18n="profileSaveBtn">Save current</button>
+    </div>
+    <div class="profile-list" id="profilesList"></div>
+    <div class="keyactions">
+      <button type="button" class="btn btn-ghost" id="profilesClose" data-i18n="apiKeyCloseBtn">Close</button>
+    </div>
+  </form>
+</dialog>
+
+<section class="hero">
+  <div class="hero-inner">
+    <h1 data-i18n="heroTitle">Which schemes might apply to me?</h1>
+    <p data-i18n="heroSub">Answer a few simple questions. SchemeSaarthi shows which rules matched, what is still missing, and links every claim back to the official source.</p>
+    <div class="trust">
+      <span>🔒</span>
+      <span data-i18n="trust">A match on this portal is not an eligibility certificate. The implementing department's verification is final.</span>
+    </div>
+    <div class="chips">
+      <span class="chip" data-i18n="chipProfiles">👤 Save unlimited profiles</span>
+      <span class="chip" data-i18n="chipStats">📊 Live official statistics</span>
+      <span class="chip" data-i18n="chipSearch">🌐 Live web search per scheme</span>
+    </div>
+  </div>
+</section>
+
+<main class="wrap">
+
+  <!-- ============ PROFILE FORM ============ -->
+  <section class="card" id="formCard">
+    <h2 data-i18n="formTitle">Tell us about yourself</h2>
+    <p class="sub" data-i18n="formSub">We ask only what is needed. Do not enter Aadhaar numbers, bank passwords or OTPs in this prototype.</p>
+
+    <form id="profileForm" novalidate>
+      <div class="grid" id="formGrid"><!-- built by JS --></div>
+      <div class="actions">
+        <button type="submit" class="btn btn-primary" data-i18n="submitBtn">Find my schemes</button>
+        <button type="button" class="btn btn-ghost" id="demoBtn" data-i18n="demoBtn">Load demo profile</button>
+        <button type="reset" class="btn btn-ghost" id="resetBtn" data-i18n="resetBtn">Clear form</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- ============ RESULTS ============ -->
+  <section id="results" aria-live="polite"></section>
+
+</main>
+
+<footer class="foot">
+  <p><strong>SchemeSaarthi</strong> — <span data-i18n="footNote">Hackathon prototype. Scheme records in this demo are illustrative and simplified. Always confirm rules, documents and deadlines on the official government source.</span></p>
+</footer>
+
+<script>
+/* =====================================================================
+   1. TRANSLATIONS
+   ===================================================================== */
+const T = {
+  en:{
+    appName:"SchemeSaarthi",
+    heroTitle:"Which schemes might apply to me?",
+    heroSub:"Answer a few simple questions. SchemeSaarthi shows which rules matched, what is still missing, and links every claim back to the official source.",
+    trust:"A match on this portal is not an eligibility certificate. The implementing department's verification is final.",
+    footNote:"Hackathon prototype. Scheme records in this demo are illustrative and simplified. Always confirm rules, documents and deadlines on the official government source.",
+    formTitle:"Tell us about yourself",
+    formSub:"We ask only what is needed. Do not enter Aadhaar numbers, bank passwords or OTPs in this prototype.",
+    submitBtn:"Find my schemes",
+    demoBtn:"Load demo profile",
+    resetBtn:"Clear form",
+    select:"Select…",
+    selectStateFirst:"Select a state first",
+    allDistricts:"All Districts",
+    optional:"optional",
+    resultsTitle:"Your scheme report",
+    noResults:"Enter your details and press “Find my schemes”.",
+    cntLikely:"likely eligible",
+    cntPossible:"possibly eligible",
+    cntNot:"likely not eligible",
+    gLikely:"Likely eligible",
+    gPossible:"Possibly eligible — more information needed",
+    gNot:"Likely not eligible — and why",
+    badgeLikely:"LIKELY ELIGIBLE",
+    badgePossible:"POSSIBLY ELIGIBLE",
+    badgeNot:"LIKELY NOT ELIGIBLE",
+    secWhy:"Why this matched",
+    secVerify:"Still to verify",
+    secBenefits:"Benefits",
+    secDocs:"Required documents",
+    secSteps:"Application process",
+    docsNote:"Only documents named in the official source are listed. Tick items you already have.",
+    youSaid:"You said",
+    notAnswered:"not answered",
+    needThis:"this answer is still missing, so the rule cannot be confirmed yet.",
+    windowNote:"Whether the current application window is open — the source does not state a deadline.",
+    source:"Source",
+    lastChecked:"Last checked",
+    deadline:"Application deadline",
+    finalDecision:"Final decision",
+    deptDecides:"made by the implementing department",
+    notSpecified:"Not found in the source",
+    whyBtn:"Why did you say this?",
+    whyLead:"These are the exact rule conditions used by the matching engine, together with the sentence from the official document that produced them. The rule engine — not the AI — decides the match.",
+    applyBtn:"Open official application portal ↗",
+    matchedOf:(n,t)=>`${n} of ${t} conditions matched`,
+    verifyNone:"No missing information for this scheme. Please still carry original documents for verification.",
+    resetDone:"Form cleared.",
+    apiKeyBtn:"🔑 data.gov.in API key",
+    apiKeyTitle:"Connect data.gov.in",
+    apiKeyDesc:"Paste your free data.gov.in API key to show live official statistics inside each matching scheme card. Your key is stored only in this browser tab and is never sent anywhere except api.data.gov.in.",
+    apiKeyLabel:"API key",
+    apiKeyHelp:"Don't have one?",
+    apiKeyGet:"Register free at data.gov.in ↗",
+    apiKeySave:"Save",
+    apiKeyClear:"Remove key",
+    apiKeyCloseBtn:"Close",
+    statsTitle:"Live official statistics — data.gov.in",
+    statsNoKey:"Connect a free data.gov.in API key to pull live official statistics for this scheme.",
+    statsConnectBtn:"Connect data.gov.in",
+    statsNoDataset:"No matching statistical dataset is linked for this particular scheme on data.gov.in.",
+    statsLoading:"Fetching live data…",
+    statsErrorGeneric:"Could not load live statistics right now. The dataset ID may need to be set, or data.gov.in did not respond.",
+    statsErrorNoResource:"This scheme's data.gov.in dataset ID hasn't been configured yet.",
+    statsSource:"Source",
+    statsRefresh:"Refresh",
+    chipProfiles:"👤 Save unlimited profiles",
+    chipStats:"📊 Live official statistics",
+    chipSearch:"🌐 Live web search per scheme",
+    profilesBtn:"👤 My profiles",
+    profilesTitle:"Save & switch profiles",
+    profilesDesc:"Save your current answers under a name so you, or a family member, can reload them later. Saved profiles stay only on this device.",
+    profileNameLabel:"Profile name",
+    profileNamePh:"e.g. My profile / Mother's profile",
+    profileSaveBtn:"Save current",
+    profileEmptyList:"No saved profiles yet. Fill the form and save it here.",
+    profileLoadBtn:"Load",
+    profileDeleteBtn:"Delete",
+    profileConfirmDelete:"Delete this saved profile? This cannot be undone.",
+    profileSavedNote:"Saved on this device",
+    apiKeyDialogTitle:"Connect live data",
+    apiKeyDialogDesc:"Both connections are optional. Keys are kept only in this browser tab for this session and are never sent anywhere except the official endpoint named below.",
+    searchKeyTitle:"Connect web search",
+    searchKeyDesc:"Add a free Google Programmable Search API key and Search Engine ID to pull live web results — news, updates and deadlines — into each scheme card.",
+    searchKeyLabel:"API key",
+    searchCxLabel:"Search engine ID (cx)",
+    searchKeyHelp:"Don't have one?",
+    searchKeyGet:"Create a free search engine ↗",
+    secWebSearch:"Latest on the web",
+    webSearchCta:"Search the live web for the latest news, updates and deadlines about this scheme.",
+    webSearchBtn:"Search now",
+    webSearchNoKey:"Connect a free web-search API key to pull live results for this scheme.",
+    webSearchConnectBtn:"Connect web search",
+    webSearchLoading:"Searching the web…",
+    webSearchErrorGeneric:"Could not fetch web results right now. Check the API key / search engine ID, or try again.",
+    webSearchEmpty:"No web results found for this search just now.",
+    webSearchNote:"Results come from the open web — always verify against the official source above before acting."
+  },
+  hi:{
+    appName:"योजना सारथी",
+    heroTitle:"मेरे लिए कौन-सी योजनाएँ लागू हो सकती हैं?",
+    heroSub:"कुछ आसान सवालों के जवाब दें। योजना सारथी बताता है कि कौन-से नियम मेल खाए, क्या जानकारी अभी बाकी है, और हर दावे के साथ आधिकारिक स्रोत का लिंक देता है।",
+    trust:"इस पोर्टल पर मिलान होना पात्रता प्रमाणपत्र नहीं है। अंतिम निर्णय क्रियान्वयन विभाग के सत्यापन पर निर्भर है।",
+    footNote:"हैकाथॉन प्रोटोटाइप। इस डेमो में योजना रिकॉर्ड उदाहरण के लिए और सरलीकृत हैं। नियम, दस्तावेज़ और समय-सीमा हमेशा आधिकारिक सरकारी स्रोत पर जाँचें।",
+    formTitle:"अपने बारे में बताइए",
+    formSub:"हम केवल वही पूछते हैं जो आवश्यक है। इस प्रोटोटाइप में आधार नंबर, बैंक पासवर्ड या ओटीपी दर्ज न करें।",
+    submitBtn:"मेरी योजनाएँ खोजें",
+    demoBtn:"डेमो प्रोफ़ाइल भरें",
+    resetBtn:"फ़ॉर्म साफ़ करें",
+    select:"चुनें…",
+    selectStateFirst:"पहले राज्य चुनें",
+    allDistricts:"सभी जिले",
+    optional:"वैकल्पिक",
+    resultsTitle:"आपकी योजना रिपोर्ट",
+    noResults:"अपनी जानकारी भरें और “मेरी योजनाएँ खोजें” दबाएँ।",
+    cntLikely:"संभवतः पात्र",
+    cntPossible:"शायद पात्र",
+    cntNot:"संभवतः अपात्र",
+    gLikely:"संभवतः पात्र",
+    gPossible:"शायद पात्र — और जानकारी चाहिए",
+    gNot:"संभवतः अपात्र — और क्यों",
+    badgeLikely:"संभवतः पात्र",
+    badgePossible:"शायद पात्र",
+    badgeNot:"संभवतः अपात्र",
+    secWhy:"यह मेल क्यों हुआ",
+    secVerify:"अभी सत्यापित करना है",
+    secBenefits:"लाभ",
+    secDocs:"आवश्यक दस्तावेज़",
+    secSteps:"आवेदन प्रक्रिया",
+    docsNote:"केवल आधिकारिक स्रोत में बताए गए दस्तावेज़ दिखाए गए हैं। जो आपके पास हैं उन्हें टिक करें।",
+    youSaid:"आपका उत्तर",
+    notAnswered:"नहीं भरा गया",
+    needThis:"यह उत्तर अभी नहीं मिला, इसलिए नियम की पुष्टि नहीं हो सकती।",
+    windowNote:"क्या वर्तमान आवेदन विंडो खुली है — स्रोत में समय-सीमा नहीं दी गई है।",
+    source:"स्रोत",
+    lastChecked:"अंतिम जाँच",
+    deadline:"आवेदन की समय-सीमा",
+    finalDecision:"अंतिम निर्णय",
+    deptDecides:"क्रियान्वयन विभाग द्वारा",
+    notSpecified:"स्रोत में नहीं मिला",
+    whyBtn:"आपने ऐसा क्यों कहा?",
+    whyLead:"ये वही नियम हैं जिन्हें मिलान इंजन ने जाँचा, और साथ में आधिकारिक दस्तावेज़ का वह वाक्य जिससे ये नियम बने। मिलान का निर्णय नियम इंजन लेता है — एआई नहीं।",
+    applyBtn:"आधिकारिक आवेदन पोर्टल खोलें ↗",
+    matchedOf:(n,t)=>`${t} में से ${n} शर्तें मेल खाईं`,
+    verifyNone:"इस योजना के लिए कोई जानकारी बाकी नहीं है। फिर भी सत्यापन के लिए मूल दस्तावेज़ साथ रखें।",
+    resetDone:"फ़ॉर्म साफ़ हो गया।",
+    apiKeyBtn:"🔑 data.gov.in API कुंजी",
+    apiKeyTitle:"data.gov.in से जोड़ें",
+    apiKeyDesc:"संबंधित योजना कार्ड में लाइव आधिकारिक आँकड़े दिखाने के लिए अपनी data.gov.in API कुंजी पेस्ट करें। आपकी कुंजी केवल इस ब्राउज़र टैब में सहेजी जाती है और केवल api.data.gov.in को भेजी जाती है।",
+    apiKeyLabel:"API कुंजी",
+    apiKeyHelp:"आपके पास कुंजी नहीं है?",
+    apiKeyGet:"data.gov.in पर मुफ़्त पंजीकरण करें ↗",
+    apiKeySave:"सहेजें",
+    apiKeyClear:"कुंजी हटाएँ",
+    apiKeyCloseBtn:"बंद करें",
+    statsTitle:"लाइव आधिकारिक आँकड़े — data.gov.in",
+    statsNoKey:"इस योजना के लाइव आधिकारिक आँकड़े देखने के लिए एक मुफ़्त data.gov.in API कुंजी जोड़ें।",
+    statsConnectBtn:"data.gov.in से जोड़ें",
+    statsNoDataset:"इस विशेष योजना के लिए data.gov.in पर कोई मेल खाता आँकड़ा डेटासेट लिंक नहीं है।",
+    statsLoading:"लाइव डेटा प्राप्त किया जा रहा है…",
+    statsErrorGeneric:"अभी लाइव आँकड़े लोड नहीं हो सके। डेटासेट आईडी सेट करनी बाकी हो सकती है, या data.gov.in ने उत्तर नहीं दिया।",
+    statsErrorNoResource:"इस योजना की data.gov.in डेटासेट आईडी अभी कॉन्फ़िगर नहीं की गई है।",
+    statsSource:"स्रोत",
+    statsRefresh:"ताज़ा करें",
+    chipProfiles:"👤 असीमित प्रोफ़ाइल सहेजें",
+    chipStats:"📊 लाइव आधिकारिक आँकड़े",
+    chipSearch:"🌐 हर योजना के लिए लाइव वेब खोज",
+    profilesBtn:"👤 मेरी प्रोफ़ाइलें",
+    profilesTitle:"प्रोफ़ाइल सहेजें और बदलें",
+    profilesDesc:"अपने वर्तमान उत्तरों को एक नाम के तहत सहेजें ताकि आप, या परिवार का कोई सदस्य, बाद में उन्हें फिर से लोड कर सके। सहेजी गई प्रोफ़ाइलें केवल इस डिवाइस पर रहती हैं।",
+    profileNameLabel:"प्रोफ़ाइल का नाम",
+    profileNamePh:"जैसे मेरी प्रोफ़ाइल / माँ की प्रोफ़ाइल",
+    profileSaveBtn:"वर्तमान सहेजें",
+    profileEmptyList:"अभी तक कोई सहेजी गई प्रोफ़ाइल नहीं है। फ़ॉर्म भरें और यहाँ सहेजें।",
+    profileLoadBtn:"लोड करें",
+    profileDeleteBtn:"हटाएँ",
+    profileConfirmDelete:"इस सहेजी गई प्रोफ़ाइल को हटाएँ? इसे पूर्ववत नहीं किया जा सकता।",
+    profileSavedNote:"इस डिवाइस पर सहेजा गया",
+    apiKeyDialogTitle:"लाइव डेटा जोड़ें",
+    apiKeyDialogDesc:"दोनों कनेक्शन वैकल्पिक हैं। कुंजियाँ केवल इस सत्र के लिए इस ब्राउज़र टैब में रखी जाती हैं और नीचे बताए गए आधिकारिक एंडपॉइंट के अलावा कहीं नहीं भेजी जातीं।",
+    searchKeyTitle:"वेब खोज जोड़ें",
+    searchKeyDesc:"इस योजना से जुड़ी ताज़ा खबरें, अपडेट और समय-सीमाएँ हर योजना कार्ड में लाने के लिए एक मुफ़्त Google Programmable Search API कुंजी और सर्च इंजन आईडी जोड़ें।",
+    searchKeyLabel:"API कुंजी",
+    searchCxLabel:"सर्च इंजन आईडी (cx)",
+    searchKeyHelp:"आपके पास कुंजी नहीं है?",
+    searchKeyGet:"मुफ़्त सर्च इंजन बनाएँ ↗",
+    secWebSearch:"वेब पर ताज़ा जानकारी",
+    webSearchCta:"इस योजना से जुड़ी ताज़ा खबरें, अपडेट और समय-सीमाएँ जानने के लिए लाइव वेब खोजें।",
+    webSearchBtn:"अभी खोजें",
+    webSearchNoKey:"इस योजना के लिए लाइव परिणाम पाने के लिए एक मुफ़्त वेब-सर्च API कुंजी जोड़ें।",
+    webSearchConnectBtn:"वेब खोज जोड़ें",
+    webSearchLoading:"वेब खोजा जा रहा है…",
+    webSearchErrorGeneric:"अभी वेब परिणाम प्राप्त नहीं हो सके। API कुंजी / सर्च इंजन आईडी जाँचें, या फिर से प्रयास करें।",
+    webSearchEmpty:"अभी इस खोज के लिए कोई वेब परिणाम नहीं मिला।",
+    webSearchNote:"परिणाम खुले वेब से हैं — कार्रवाई करने से पहले हमेशा ऊपर दिए आधिकारिक स्रोत से पुष्टि करें।"
+  },
+  te:{
+    appName:"పథకసారథి",
+    heroTitle:"నాకు ఏ ప్రభుత్వ పథకాలు వర్తించవచ్చు?",
+    heroSub:"కొన్ని సాధారణ ప్రశ్నలకు సమాధానం ఇవ్వండి. ఏ నిబంధనలు సరిపోలాయో, ఇంకా ఏమి తెలియాలో పథకసారథి చూపిస్తుంది, ప్రతి వాదనను అధికారిక మూలానికి లింక్ చేస్తుంది.",
+    trust:"ఈ పోర్టల్‌లో సరిపోలిక అనేది అర్హత ధృవీకరణ పత్రం కాదు. అమలు చేసే శాఖ యొక్క ధృవీకరణే తుది నిర్ణయం.",
+    footNote:"హ్యాకథాన్ ప్రోటోటైప్. ఈ డెమోలోని పథక వివరాలు ఉదాహరణ కోసం సరళీకరించినవి. నిబంధనలు, పత్రాలు మరియు గడువులను ఎల్లప్పుడూ అధికారిక ప్రభుత్వ మూలంలో నిర్ధారించుకోండి.",
+    formTitle:"మీ గురించి చెప్పండి",
+    formSub:"అవసరమైనది మాత్రమే మేము అడుగుతాము. ఈ ప్రోటోటైప్‌లో ఆధార్ నంబర్, బ్యాంక్ పాస్‌వర్డ్‌లు లేదా OTPలు నమోదు చేయవద్దు.",
+    submitBtn:"నా పథకాలను కనుగొనండి",
+    demoBtn:"డెమో ప్రొఫైల్ లోడ్ చేయండి",
+    resetBtn:"ఫారం క్లియర్ చేయండి",
+    select:"ఎంచుకోండి…",
+    selectStateFirst:"ముందుగా రాష్ట్రం ఎంచుకోండి",
+    allDistricts:"అన్ని జిల్లాలు",
+    optional:"ఐచ్ఛికం",
+    resultsTitle:"మీ పథకాల నివేదిక",
+    noResults:"మీ వివరాలు నమోదు చేసి “నా పథకాలను కనుగొనండి” నొక్కండి.",
+    cntLikely:"అర్హత ఉండవచ్చు",
+    cntPossible:"అర్హత ఉండవచ్చు — నిర్ధారణ కావాలి",
+    cntNot:"అర్హత లేకపోవచ్చు",
+    gLikely:"అర్హత ఉండవచ్చు",
+    gPossible:"అర్హత ఉండవచ్చు — మరింత సమాచారం అవసరం",
+    gNot:"అర్హత లేకపోవచ్చు — కారణం",
+    badgeLikely:"అర్హత ఉండవచ్చు",
+    badgePossible:"బహుశా అర్హత",
+    badgeNot:"అర్హత లేదు",
+    secWhy:"ఇది ఎందుకు సరిపోలింది",
+    secVerify:"ఇంకా నిర్ధారించాల్సినవి",
+    secBenefits:"ప్రయోజనాలు",
+    secDocs:"అవసరమైన పత్రాలు",
+    secSteps:"దరఖాస్తు ప్రక్రియ",
+    docsNote:"అధికారిక మూలంలో పేర్కొన్న పత్రాలు మాత్రమే ఇక్కడ చూపబడ్డాయి. మీ వద్ద ఉన్నవాటిని టిక్ చేయండి.",
+    youSaid:"మీరు చెప్పింది",
+    notAnswered:"సమాధానం ఇవ్వలేదు",
+    needThis:"ఈ సమాధానం ఇంకా అందలేదు, కాబట్టి ఈ నిబంధనను నిర్ధారించలేము.",
+    windowNote:"ప్రస్తుత దరఖాస్తు గడువు తెరిచి ఉందా — మూలంలో గడువు పేర్కొనలేదు.",
+    source:"మూలం",
+    lastChecked:"చివరిసారి తనిఖీ చేసినది",
+    deadline:"దరఖాస్తు గడువు",
+    finalDecision:"తుది నిర్ణయం",
+    deptDecides:"అమలు చేసే శాఖ ద్వారా నిర్ణయించబడుతుంది",
+    notSpecified:"మూలంలో కనుగొనబడలేదు",
+    whyBtn:"మీరు ఎందుకు ఇలా చెప్పారు?",
+    whyLead:"ఇవి సరిపోలిక ఇంజిన్ తనిఖీ చేసిన నిజమైన నిబంధన షరతులు, వాటిని రూపొందించిన అధికారిక పత్రంలోని వాక్యంతో పాటు. సరిపోలిక నిర్ణయాన్ని రూల్ ఇంజిన్ తీసుకుంటుంది — AI కాదు.",
+    applyBtn:"అధికారిక దరఖాస్తు పోర్టల్ తెరవండి ↗",
+    matchedOf:(n,t)=>`${t} లో ${n} షరతులు సరిపోలాయి`,
+    verifyNone:"ఈ పథకానికి ఇంకా తెలియాల్సిన సమాచారం లేదు. అయినప్పటికీ ధృవీకరణ కోసం అసలు పత్రాలను వెంట ఉంచుకోండి.",
+    resetDone:"ఫారం క్లియర్ చేయబడింది.",
+    apiKeyBtn:"🔑 data.gov.in API కీ",
+    apiKeyTitle:"data.gov.in కనెక్ట్ చేయండి",
+    apiKeyDesc:"సంబంధిత పథకం కార్డ్‌లో ప్రత్యక్ష అధికారిక గణాంకాలను చూపించడానికి మీ ఉచిత data.gov.in API కీని పేస్ట్ చేయండి. మీ కీ ఈ బ్రౌజర్ ట్యాబ్‌లో మాత్రమే నిల్వ ఉంటుంది మరియు api.data.gov.in కి తప్ప ఎక్కడికీ పంపబడదు.",
+    apiKeyLabel:"API కీ",
+    apiKeyHelp:"మీ వద్ద కీ లేదా?",
+    apiKeyGet:"data.gov.in లో ఉచితంగా నమోదు చేసుకోండి ↗",
+    apiKeySave:"సేవ్ చేయండి",
+    apiKeyClear:"కీని తొలగించండి",
+    apiKeyCloseBtn:"మూసివేయండి",
+    statsTitle:"ప్రత్యక్ష అధికారిక గణాంకాలు — data.gov.in",
+    statsNoKey:"ఈ పథకానికి ప్రత్యక్ష అధికారిక గణాంకాలను పొందడానికి ఉచిత data.gov.in API కీని కనెక్ట్ చేయండి.",
+    statsConnectBtn:"data.gov.in కనెక్ట్ చేయండి",
+    statsNoDataset:"ఈ నిర్దిష్ట పథకానికి data.gov.in లో సరిపోలే గణాంక డేటాసెట్ లింక్ చేయబడలేదు.",
+    statsLoading:"ప్రత్యక్ష డేటాను పొందుతోంది…",
+    statsErrorGeneric:"ప్రస్తుతం ప్రత్యక్ష గణాంకాలను లోడ్ చేయలేకపోయాము. డేటాసెట్ ID సెట్ చేయాల్సి ఉండవచ్చు, లేదా data.gov.in స్పందించలేదు.",
+    statsErrorNoResource:"ఈ పథకం యొక్క data.gov.in డేటాసెట్ ID ఇంకా కాన్ఫిగర్ చేయబడలేదు.",
+    statsSource:"మూలం",
+    statsRefresh:"రిఫ్రెష్ చేయండి",
+    chipProfiles:"👤 అపరిమిత ప్రొఫైల్‌లు సేవ్ చేయండి",
+    chipStats:"📊 ప్రత్యక్ష అధికారిక గణాంకాలు",
+    chipSearch:"🌐 ప్రతి పథకానికి ప్రత్యక్ష వెబ్ శోధన",
+    profilesBtn:"👤 నా ప్రొఫైల్‌లు",
+    profilesTitle:"ప్రొఫైల్‌లను సేవ్ చేయండి & మార్చండి",
+    profilesDesc:"మీరు లేదా కుటుంబ సభ్యుడు తర్వాత తిరిగి లోడ్ చేసుకోవడానికి మీ ప్రస్తుత సమాధానాలను ఒక పేరుతో సేవ్ చేయండి. సేవ్ చేసిన ప్రొఫైల్‌లు ఈ పరికరంలో మాత్రమే ఉంటాయి.",
+    profileNameLabel:"ప్రొఫైల్ పేరు",
+    profileNamePh:"ఉదా. నా ప్రొఫైల్ / అమ్మ ప్రొఫైల్",
+    profileSaveBtn:"ప్రస్తుతం సేవ్ చేయండి",
+    profileEmptyList:"ఇంకా సేవ్ చేసిన ప్రొఫైల్‌లు లేవు. ఫారం నింపి ఇక్కడ సేవ్ చేయండి.",
+    profileLoadBtn:"లోడ్ చేయండి",
+    profileDeleteBtn:"తొలగించండి",
+    profileConfirmDelete:"ఈ సేవ్ చేసిన ప్రొఫైల్‌ను తొలగించాలా? దీన్ని వెనక్కి తీసుకోలేరు.",
+    profileSavedNote:"ఈ పరికరంలో సేవ్ చేయబడింది",
+    apiKeyDialogTitle:"ప్రత్యక్ష డేటాను కనెక్ట్ చేయండి",
+    apiKeyDialogDesc:"రెండు కనెక్షన్‌లు ఐచ్ఛికం. కీలు ఈ సెషన్ కోసం ఈ బ్రౌజర్ ట్యాబ్‌లో మాత్రమే ఉంచబడతాయి మరియు దిగువ పేర్కొన్న అధికారిక ఎండ్‌పాయింట్‌కు తప్ప మరెక్కడికీ పంపబడవు.",
+    searchKeyTitle:"వెబ్ శోధనను కనెక్ట్ చేయండి",
+    searchKeyDesc:"ఈ పథకానికి సంబంధించిన తాజా వార్తలు, అప్‌డేట్‌లు మరియు గడువులను ప్రతి పథకం కార్డ్‌లోకి తీసుకురావడానికి ఉచిత Google Programmable Search API కీ మరియు సెర్చ్ ఇంజన్ ID జోడించండి.",
+    searchKeyLabel:"API కీ",
+    searchCxLabel:"సెర్చ్ ఇంజన్ ID (cx)",
+    searchKeyHelp:"మీ వద్ద కీ లేదా?",
+    searchKeyGet:"ఉచిత సెర్చ్ ఇంజన్‌ను సృష్టించండి ↗",
+    secWebSearch:"వెబ్‌లో తాజా సమాచారం",
+    webSearchCta:"ఈ పథకానికి సంబంధించిన తాజా వార్తలు, అప్‌డేట్‌లు మరియు గడువుల కోసం ప్రత్యక్ష వెబ్‌ను శోధించండి.",
+    webSearchBtn:"ఇప్పుడు శోధించండి",
+    webSearchNoKey:"ఈ పథకానికి ప్రత్యక్ష ఫలితాలను పొందడానికి ఉచిత వెబ్-సెర్చ్ API కీని కనెక్ట్ చేయండి.",
+    webSearchConnectBtn:"వెబ్ శోధనను కనెక్ట్ చేయండి",
+    webSearchLoading:"వెబ్‌ను శోధిస్తోంది…",
+    webSearchErrorGeneric:"ప్రస్తుతం వెబ్ ఫలితాలను పొందలేకపోయాము. API కీ / సెర్చ్ ఇంజన్ IDని తనిఖీ చేయండి, లేదా మళ్ళీ ప్రయత్నించండి.",
+    webSearchEmpty:"ప్రస్తుతం ఈ శోధన కోసం వెబ్ ఫలితాలు కనుగొనబడలేదు.",
+    webSearchNote:"ఫలితాలు బహిరంగ వెబ్ నుండి వచ్చాయి — చర్య తీసుకునే ముందు ఎల్లప్పుడూ పైన ఇచ్చిన అధికారిక మూలంతో నిర్ధారించుకోండి."
+  }
+};
+
+/* =====================================================================
+   2. FIELD LABELS + OPTIONS
+   ===================================================================== */
+const STATES = [
+  {v:"ALL", en:"All States / UTs", hi:"सभी राज्य / केंद्र शासित प्रदेश", te:"అన్ని రాష్ట్రాలు / కేంద్రపాలిత ప్రాంతాలు"},
+  {v:"AN", en:"Andaman and Nicobar Islands", hi:"अंडमान और निकोबार द्वीप समूह", te:"అండమాన్ నికోబార్ దీవులు"},
+  {v:"AP", en:"Andhra Pradesh", hi:"आंध्र प्रदेश", te:"ఆంధ్రప్రదేశ్"},
+  {v:"AR", en:"Arunachal Pradesh", hi:"अरुणाचल प्रदेश", te:"అరుణాచల్ ప్రదేశ్"},
+  {v:"AS", en:"Assam", hi:"असम", te:"అస్సాం"},
+  {v:"BR", en:"Bihar", hi:"बिहार", te:"బిహార్"},
+  {v:"CH", en:"Chandigarh", hi:"चंडीगढ़", te:"చండీగఢ్"},
+  {v:"CG", en:"Chhattisgarh", hi:"छत्तीसगढ़", te:"ఛత్తీస్‌గఢ్"},
+  {v:"DN", en:"Dadra and Nagar Haveli and Daman and Diu", hi:"दादरा और नगर हवेली और दमन और दीव", te:"దాద్రా నగర్ హవేలీ మరియు డామన్ డయ్యూ"},
+  {v:"DL", en:"Delhi", hi:"दिल्ली", te:"ఢిల్లీ"},
+  {v:"GA", en:"Goa", hi:"गोवा", te:"గోవా"},
+  {v:"GJ", en:"Gujarat", hi:"गुजरात", te:"గుజరాత్"},
+  {v:"HR", en:"Haryana", hi:"हरियाणा", te:"హర్యానా"},
+  {v:"HP", en:"Himachal Pradesh", hi:"हिमाचल प्रदेश", te:"హిమాచల్ ప్రదేశ్"},
+  {v:"JK", en:"Jammu and Kashmir", hi:"जम्मू और कश्मीर", te:"జమ్మూ కాశ్మీర్"},
+  {v:"JH", en:"Jharkhand", hi:"झारखंड", te:"జార్ఖండ్"},
+  {v:"KA", en:"Karnataka", hi:"कर्नाटक", te:"కర్ణాటక"},
+  {v:"KL", en:"Kerala", hi:"केरल", te:"కేరళ"},
+  {v:"LA", en:"Ladakh", hi:"लद्दाख", te:"లడఖ్"},
+  {v:"LD", en:"Lakshadweep", hi:"लक्षद्वीप", te:"లక్షద్వీప్"},
+  {v:"MP", en:"Madhya Pradesh", hi:"मध्य प्रदेश", te:"మధ్యప్రదేశ్"},
+  {v:"MH", en:"Maharashtra", hi:"महाराष्ट्र", te:"మహారాష్ట్ర"},
+  {v:"MN", en:"Manipur", hi:"मणिपुर", te:"మణిపూర్"},
+  {v:"ML", en:"Meghalaya", hi:"मेघालय", te:"మేఘాలయ"},
+  {v:"MZ", en:"Mizoram", hi:"मिज़ोरम", te:"మిజోరం"},
+  {v:"NL", en:"Nagaland", hi:"नागालैंड", te:"నాగాలాండ్"},
+  {v:"OD", en:"Odisha", hi:"ओडिशा", te:"ఒడిశా"},
+  {v:"PY", en:"Puducherry", hi:"पुडुचेरी", te:"పుదుచ్చేరి"},
+  {v:"PB", en:"Punjab", hi:"पंजाब", te:"పంజాబ్"},
+  {v:"RJ", en:"Rajasthan", hi:"राजस्थान", te:"రాజస్థాన్"},
+  {v:"SK", en:"Sikkim", hi:"सिक्किम", te:"సిక్కిం"},
+  {v:"TN", en:"Tamil Nadu", hi:"तमिलनाडु", te:"తమిళనాడు"},
+  {v:"TS", en:"Telangana", hi:"तेलंगाना", te:"తెలంగాణ"},
+  {v:"TR", en:"Tripura", hi:"त्रिपुरा", te:"త్రిపుర"},
+  {v:"UP", en:"Uttar Pradesh", hi:"उत्तर प्रदेश", te:"ఉత్తర ప్రదేశ్"},
+  {v:"UK", en:"Uttarakhand", hi:"उत्तराखंड", te:"ఉత్తరాఖండ్"},
+  {v:"WB", en:"West Bengal", hi:"पश्चिम बंगाल", te:"పశ్చిమ బెంగాల్"},
+  {v:"OTHER", en:"Other", hi:"अन्य", te:"ఇతర"}
+];
+
+const DISTRICTS = {
+  AN: ["Nicobar","North and Middle Andaman","South Andaman"],
+  AP: ["Alluri Sitharama Raju","Anakapalli","Anantapur","Annamayya","Bapatla","Chittoor","Dr. B.R. Ambedkar Konaseema","East Godavari","Eluru","Guntur","Kakinada","Krishna","Kurnool","Nandyal","NTR","Palnadu","Parvathipuram Manyam","Prakasam","Sri Potti Sriramulu Nellore","Sri Sathya Sai","Srikakulam","Tirupati","Visakhapatnam","Vizianagaram","West Godavari","YSR Kadapa"],
+  AR: ["Anjaw","Changlang","Dibang Valley","East Kameng","East Siang","Kamle","Kra Daadi","Kurung Kumey","Lepa Rada","Lohit","Longding","Lower Dibang Valley","Lower Siang","Lower Subansiri","Namsai","Pakke-Kessang","Papum Pare","Shi Yomi","Siang","Tawang","Tirap","Upper Dibang Valley","Upper Siang","Upper Subansiri","West Kameng","West Siang"],
+  AS: ["Baksa","Barpeta","Biswanath","Bongaigaon","Cachar","Charaideo","Chirang","Darrang","Dhemaji","Dhubri","Dibrugarh","Dima Hasao","Goalpara","Golaghat","Hailakandi","Hojai","Jorhat","Kamrup","Kamrup Metropolitan","Karbi Anglong","Karimganj","Kokrajhar","Lakhimpur","Majuli","Morigaon","Nagaon","Nalbari","Sivasagar","Sonitpur","South Salmara-Mankachar","Tinsukia","Udalguri","West Karbi Anglong"],
+  BR: ["Araria","Arwal","Aurangabad","Banka","Begusarai","Bhagalpur","Bhojpur","Buxar","Darbhanga","East Champaran","Gaya","Gopalganj","Jamui","Jehanabad","Kaimur","Katihar","Khagaria","Kishanganj","Lakhisarai","Madhepura","Madhubani","Munger","Muzaffarpur","Nalanda","Nawada","Patna","Purnia","Rohtas","Saharsa","Samastipur","Saran","Sheikhpura","Sheohar","Sitamarhi","Siwan","Supaul","Vaishali","West Champaran"],
+  CH: ["Chandigarh"],
+  CG: ["Balod","Baloda Bazar","Balrampur","Bastar","Bemetara","Bijapur","Bilaspur","Dantewada","Dhamtari","Durg","Gariaband","Gaurela-Pendra-Marwahi","Janjgir-Champa","Jashpur","Kabirdham","Kanker","Kondagaon","Korba","Koriya","Mahasamund","Mungeli","Narayanpur","Raigarh","Raipur","Rajnandgaon","Sukma","Surajpur","Surguja"],
+  DN: ["Dadra and Nagar Haveli","Daman","Diu"],
+  DL: ["Central Delhi","East Delhi","New Delhi","North Delhi","North East Delhi","North West Delhi","Shahdara","South Delhi","South East Delhi","South West Delhi","West Delhi"],
+  GA: ["North Goa","South Goa"],
+  GJ: ["Ahmedabad","Amreli","Anand","Aravalli","Banaskantha","Bharuch","Bhavnagar","Botad","Chhota Udepur","Dahod","Dang","Devbhoomi Dwarka","Gandhinagar","Gir Somnath","Jamnagar","Junagadh","Kheda","Kutch","Mahisagar","Mehsana","Morbi","Narmada","Navsari","Panchmahal","Patan","Porbandar","Rajkot","Sabarkantha","Surat","Surendranagar","Tapi","Vadodara","Valsad"],
+  HR: ["Ambala","Bhiwani","Charkhi Dadri","Faridabad","Fatehabad","Gurugram","Hisar","Jhajjar","Jind","Kaithal","Karnal","Kurukshetra","Mahendragarh","Nuh","Palwal","Panchkula","Panipat","Rewari","Rohtak","Sirsa","Sonipat","Yamunanagar"],
+  HP: ["Bilaspur","Chamba","Hamirpur","Kangra","Kinnaur","Kullu","Lahaul and Spiti","Mandi","Shimla","Sirmaur","Solan","Una"],
+  JK: ["Anantnag","Bandipora","Baramulla","Budgam","Doda","Ganderbal","Jammu","Kathua","Kishtwar","Kulgam","Kupwara","Poonch","Pulwama","Rajouri","Ramban","Reasi","Samba","Shopian","Srinagar","Udhampur"],
+  JH: ["Bokaro","Chatra","Deoghar","Dhanbad","Dumka","East Singhbhum","Garhwa","Giridih","Godda","Gumla","Hazaribagh","Jamtara","Khunti","Koderma","Latehar","Lohardaga","Pakur","Palamu","Ramgarh","Ranchi","Sahebganj","Seraikela Kharsawan","Simdega","West Singhbhum"],
+  KA: ["Bagalkot","Ballari","Belagavi","Bengaluru Rural","Bengaluru Urban","Bidar","Chamarajanagar","Chikkaballapur","Chikkamagaluru","Chitradurga","Dakshina Kannada","Davanagere","Dharwad","Gadag","Hassan","Haveri","Kalaburagi","Kodagu","Kolar","Koppal","Mandya","Mysuru","Raichur","Ramanagara","Shivamogga","Tumakuru","Udupi","Uttara Kannada","Vijayanagara","Vijayapura","Yadgir"],
+  KL: ["Alappuzha","Ernakulam","Idukki","Kannur","Kasaragod","Kollam","Kottayam","Kozhikode","Malappuram","Palakkad","Pathanamthitta","Thiruvananthapuram","Thrissur","Wayanad"],
+  LA: ["Kargil","Leh"],
+  LD: ["Lakshadweep"],
+  MP: ["Agar Malwa","Alirajpur","Anuppur","Ashoknagar","Balaghat","Barwani","Betul","Bhind","Bhopal","Burhanpur","Chhatarpur","Chhindwara","Damoh","Datia","Dewas","Dhar","Dindori","Guna","Gwalior","Harda","Hoshangabad","Indore","Jabalpur","Jhabua","Katni","Khandwa","Khargone","Mandla","Mandsaur","Morena","Narsinghpur","Neemuch","Niwari","Panna","Raisen","Rajgarh","Ratlam","Rewa","Sagar","Satna","Sehore","Seoni","Shahdol","Shajapur","Sheopur","Shivpuri","Sidhi","Singrauli","Tikamgarh","Ujjain","Umaria","Vidisha"],
+  MH: ["Ahmednagar","Akola","Amravati","Beed","Bhandara","Buldhana","Chandrapur","Chhatrapati Sambhajinagar","Dharashiv","Dhule","Gadchiroli","Gondia","Hingoli","Jalgaon","Jalna","Kolhapur","Latur","Mumbai City","Mumbai Suburban","Nagpur","Nanded","Nandurbar","Nashik","Palghar","Parbhani","Pune","Raigad","Ratnagiri","Sangli","Satara","Sindhudurg","Solapur","Thane","Wardha","Washim","Yavatmal"],
+  MN: ["Bishnupur","Chandel","Churachandpur","Imphal East","Imphal West","Jiribam","Kakching","Kamjong","Kangpokpi","Noney","Pherzawl","Senapati","Tamenglong","Tengnoupal","Thoubal","Ukhrul"],
+  ML: ["East Garo Hills","East Jaintia Hills","East Khasi Hills","North Garo Hills","Ri Bhoi","South Garo Hills","South West Garo Hills","South West Khasi Hills","West Garo Hills","West Jaintia Hills","West Khasi Hills"],
+  MZ: ["Aizawl","Champhai","Hnahthial","Khawzawl","Kolasib","Lawngtlai","Lunglei","Mamit","Saiha","Saitual","Serchhip"],
+  NL: ["Chumukedima","Dimapur","Kiphire","Kohima","Longleng","Mokokchung","Mon","Niuland","Noklak","Peren","Phek","Shamator","Tseminyu","Tuensang","Wokha","Zunheboto"],
+  OD: ["Angul","Balangir","Balasore","Bargarh","Bhadrak","Boudh","Cuttack","Deogarh","Dhenkanal","Gajapati","Ganjam","Jagatsinghpur","Jajpur","Jharsuguda","Kalahandi","Kandhamal","Kendrapara","Kendujhar","Khordha","Koraput","Malkangiri","Mayurbhanj","Nabarangpur","Nayagarh","Nuapada","Puri","Rayagada","Sambalpur","Subarnapur","Sundargarh"],
+  PY: ["Karaikal","Mahe","Puducherry","Yanam"],
+  PB: ["Amritsar","Barnala","Bathinda","Faridkot","Fatehgarh Sahib","Fazilka","Ferozepur","Gurdaspur","Hoshiarpur","Jalandhar","Kapurthala","Ludhiana","Malerkotla","Mansa","Moga","Muktsar","Pathankot","Patiala","Rupnagar","Sahibzada Ajit Singh Nagar","Sangrur","Shaheed Bhagat Singh Nagar","Tarn Taran"],
+  RJ: ["Ajmer","Alwar","Balotra","Banswara","Baran","Barmer","Beawar","Bharatpur","Bhilwara","Bikaner","Bundi","Chittorgarh","Churu","Dausa","Deeg","Dholpur","Dungarpur","Hanumangarh","Jaipur","Jaisalmer","Jalore","Jhalawar","Jhunjhunu","Jodhpur","Karauli","Kekri","Khairthal-Tijara","Kota","Kotputli-Behror","Nagaur","Naraina","Pali","Phalodi","Pratapgarh","Rajsamand","Salumbar","Sanchore","Sawai Madhopur","Shahpura","Sikar","Sirohi","Sri Ganganagar","Tonk","Udaipur"],
+  SK: ["Gangtok","Gyalshing","Mangan","Namchi","Pakyong","Soreng"],
+  TN: ["Ariyalur","Chengalpattu","Chennai","Coimbatore","Cuddalore","Dharmapuri","Dindigul","Erode","Kallakurichi","Kanchipuram","Kanyakumari","Karur","Krishnagiri","Madurai","Mayiladuthurai","Nagapattinam","Namakkal","Nilgiris","Perambalur","Pudukkottai","Ramanathapuram","Ranipet","Salem","Sivaganga","Tenkasi","Thanjavur","Theni","Thoothukudi","Tiruchirappalli","Tirunelveli","Tirupathur","Tiruppur","Tiruvallur","Tiruvannamalai","Tiruvarur","Vellore","Viluppuram","Virudhunagar"],
+  TS: ["Adilabad","Bhadradri Kothagudem","Hanumakonda","Hyderabad","Jagtial","Jangaon","Jayashankar Bhupalpally","Jogulamba Gadwal","Kamareddy","Karimnagar","Khammam","Komaram Bheem Asifabad","Mahabubabad","Mahabubnagar","Mancherial","Medak","Medchal-Malkajgiri","Mulugu","Nagarkurnool","Nalgonda","Narayanpet","Nirmal","Nizamabad","Peddapalli","Rajanna Sircilla","Rangareddy","Sangareddy","Siddipet","Suryapet","Vikarabad","Wanaparthy","Warangal","Yadadri Bhuvanagiri"],
+  TR: ["Dhalai","Gomati","Khowai","North Tripura","Sepahijala","South Tripura","Unakoti","West Tripura"],
+  UP: ["Agra","Aligarh","Ambedkar Nagar","Amethi","Amroha","Auraiya","Ayodhya","Azamgarh","Baghpat","Bahraich","Ballia","Balrampur","Banda","Barabanki","Bareilly","Basti","Bhadohi","Bijnor","Budaun","Bulandshahr","Chandauli","Chitrakoot","Deoria","Etah","Etawah","Farrukhabad","Fatehpur","Firozabad","Gautam Buddha Nagar","Ghaziabad","Ghazipur","Gonda","Gorakhpur","Hamirpur","Hapur","Hardoi","Hathras","Jalaun","Jaunpur","Jhansi","Kannauj","Kanpur Dehat","Kanpur Nagar","Kasganj","Kaushambi","Kheri","Kushinagar","Lalitpur","Lucknow","Maharajganj","Mahoba","Mainpuri","Mathura","Mau","Meerut","Mirzapur","Moradabad","Muzaffarnagar","Pilibhit","Pratapgarh","Prayagraj","Raebareli","Rampur","Saharanpur","Sambhal","Sant Kabir Nagar","Shahjahanpur","Shamli","Shravasti","Siddharthnagar","Sitapur","Sonbhadra","Sultanpur","Unnao","Varanasi"],
+  UK: ["Almora","Bageshwar","Chamoli","Champawat","Dehradun","Haridwar","Nainital","Pauri Garhwal","Pithoragarh","Rudraprayag","Tehri Garhwal","Udham Singh Nagar","Uttarkashi"],
+  WB: ["Alipurduar","Bankura","Birbhum","Cooch Behar","Dakshin Dinajpur","Darjeeling","Hooghly","Howrah","Jalpaiguri","Jhargram","Kalimpong","Kolkata","Malda","Murshidabad","Nadia","North 24 Parganas","Paschim Bardhaman","Paschim Medinipur","Purba Bardhaman","Purba Medinipur","Purulia","South 24 Parganas","Uttar Dinajpur"],
+  OTHER: []
+};
+
+const FIELD_LABELS = {
+  age:{en:"Age", hi:"आयु", te:"వయస్సు"},
+  state:{en:"State / UT", hi:"राज्य / केंद्र शासित प्रदेश", te:"రాష్ట్రం / కేంద్రపాలిత ప్రాంతం"},
+  district:{en:"District", hi:"जिला", te:"జిల్లా"},
+  gender:{en:"Gender", hi:"लिंग", te:"లింగం"},
+  income:{en:"Annual family income (₹)", hi:"वार्षिक पारिवारिक आय (₹)", te:"వార్షిక కుటుంబ ఆదాయం (₹)"},
+  occupation:{en:"Occupation", hi:"व्यवसाय", te:"వృత్తి"},
+  education:{en:"Education level", hi:"शिक्षा स्तर", te:"విద్యా స్థాయి"},
+  category:{en:"Social category", hi:"सामाजिक वर्ग", te:"సామాజిక వర్గం"},
+  disability:{en:"Disability", hi:"दिव्यांगता", te:"వైకల్యం"},
+  disability_pct:{en:"Disability percentage (%)", hi:"दिव्यांगता प्रतिशत (%)", te:"వైకల్య శాతం (%)"},
+  residence:{en:"Residence", hi:"निवास", te:"నివాసం"},
+  landholding:{en:"Landholding (acres)", hi:"भूमि जोत (एकड़)", te:"భూమి పరిమాణం (ఎకరాలు)"},
+  already:{en:"Already receiving a similar benefit?", hi:"पहले से समान लाभ मिल रहा है?", te:"ఇప్పటికే ఇలాంటి ప్రయోజనం పొందుతున్నారా?"}
+};
+
+const OPTIONS = {
+  state: STATES,
+  gender:[
+    {v:"female",en:"Female",  hi:"महिला",  te:"స్త్రీ"},
+    {v:"male",  en:"Male",    hi:"पुरुष",  te:"పురుషుడు"},
+    {v:"other", en:"Other",   hi:"अन्य",   te:"ఇతర"}
+  ],
+  occupation:[
+    {v:"student",    en:"Student",                    hi:"छात्र",                    te:"విద్యార్థి"},
+    {v:"farmer",     en:"Farmer",                     hi:"किसान",                    te:"రైతు"},
+    {v:"daily_wage", en:"Daily-wage / informal worker",hi:"दिहाड़ी / अनौपचारिक श्रमिक",te:"రోజువారీ కూలీ / అనధికారిక కార్మికుడు"},
+    {v:"employed",   en:"Salaried / self-employed",   hi:"वेतनभोगी / स्व-रोज़गार",     te:"జీతం పొందేవారు / స్వయం ఉపాధి"},
+    {v:"unemployed", en:"Unemployed",                 hi:"बेरोज़गार",                 te:"నిరుద్యోగి"},
+    {v:"homemaker",  en:"Homemaker",                  hi:"गृहिणी",                   te:"గృహిణి"}
+  ],
+  education:[
+    {v:"below10", en:"Below Class 10",  hi:"कक्षा 10 से नीचे",  te:"10వ తరగతి కంటే తక్కువ"},
+    {v:"edu10",   en:"Class 10 passed", hi:"कक्षा 10 उत्तीर्ण", te:"10వ తరగతి ఉత్తీర్ణులు"},
+    {v:"edu12",   en:"Class 12 passed", hi:"कक्षा 12 उत्तीर्ण", te:"12వ తరగతి ఉత్తీర్ణులు"},
+    {v:"iti",     en:"ITI",             hi:"आईटीआई",            te:"ఐటీఐ"},
+    {v:"diploma", en:"Diploma",         hi:"डिप्लोमा",          te:"డిప్లొమా"},
+    {v:"degree",  en:"Graduate degree", hi:"स्नातक डिग्री",     te:"గ్రాడ్యుయేషన్ డిగ్రీ"},
+    {v:"pg",      en:"Post-graduate",   hi:"स्नातकोत्तर",       te:"పోస్ట్ గ్రాడ్యుయేషన్"}
+  ],
+  category:[
+    {v:"general", en:"General",       hi:"सामान्य",           te:"జనరల్"},
+    {v:"obc",     en:"OBC",           hi:"ओबीसी",             te:"ఓబీసీ"},
+    {v:"sc",      en:"SC",            hi:"अनुसूचित जाति",      te:"ఎస్సీ"},
+    {v:"st",      en:"ST",            hi:"अनुसूचित जनजाति",   te:"ఎస్టీ"},
+    {v:"vjnt",    en:"VJNT / NT",     hi:"वीजेएनटी / एनटी",    te:"వీజేఎన్టీ / ఎన్టీ"},
+    {v:"ews",     en:"EWS",           hi:"ईडब्ल्यूएस",         te:"ఈడబ్ల్యూఎస్"}
+  ],
+  disability:[
+    {v:"yes", en:"Yes", hi:"हाँ",  te:"అవును"},
+    {v:"no",  en:"No",  hi:"नहीं", te:"కాదు"}
+  ],
+  residence:[
+    {v:"rural", en:"Rural", hi:"ग्रामीण", te:"గ్రామీణం"},
+    {v:"urban", en:"Urban", hi:"शहरी",   te:"పట్టణం"}
+  ],
+  already:[
+    {v:"no",  en:"No",  hi:"नहीं", te:"కాదు"},
+    {v:"yes", en:"Yes", hi:"हाँ",  te:"అవును"}
+  ]
+};
+
+const FIELDS = [
+  {key:"age",            type:"number", ph:"22", min:0, max:120, icon:"🎂"},
+  {key:"state",          type:"select", options:"state", icon:"📍"},
+  {key:"district",       type:"select", options:"district", depends:"state", icon:"🏙️"},
+  {key:"gender",         type:"select", options:"gender", icon:"👤"},
+  {key:"income",         type:"number", ph:"300000", min:0, step:1000, icon:"₹"},
+  {key:"occupation",     type:"select", options:"occupation", icon:"💼"},
+  {key:"education",      type:"select", options:"education", icon:"🎓"},
+  {key:"category",       type:"select", options:"category", icon:"🧾"},
+  {key:"disability",     type:"select", options:"disability", icon:"♿"},
+  {key:"disability_pct", type:"number", ph:"40", min:0, max:100, icon:"%"},
+  {key:"residence",      type:"select", options:"residence", icon:"🏠"},
+  {key:"landholding",    type:"number", ph:"0", min:0, step:0.1, icon:"🌾"},
+  {key:"already",        type:"select", options:"already", icon:"🔁"}
+];
+
+/* =====================================================================
+   3. SCHEME DATABASE  (demo dataset — illustrative & simplified)
+   ===================================================================== */
+const SCHEMES = [
+  {
+    id:"shahu",
+    name:{
+      en:"Rajarshi Chhatrapati Shahu Maharaj Shikshan Shulkh Shishyavrutti Yojana",
+      hi:"राजर्षि छत्रपति शाहू महाराज शिक्षण शुल्क छात्रवृत्ति योजना",
+      te:"రాజర్షి ఛత్రపతి షాహూ మహారాజ్ విద్యా రుసుము ఉపకార వేతన పథకం"
+    },
+    department:"Higher & Technical Education Department, Government of Maharashtra",
+    jurisdiction:"Maharashtra",
+    level:"State",
+    benefit:"Tuition fee and examination fee reimbursement as specified in the Government Resolution, subject to course and institute category.",
+    rules:[
+      {field:"state",      operator:"equals",  value:"MH",
+       source_text:"The scheme is applicable to students who are domiciled in the State of Maharashtra.",
+       source_ref:"Government Resolution, clause 3"},
+      {field:"occupation", operator:"equals",  value:"student",
+       source_text:"Applicant must be a bona fide student enrolled in a recognised course.",
+       source_ref:"Government Resolution, clause 4(a)"},
+      {field:"education",  operator:"in",      value:["iti","diploma","degree","pg"],
+       source_text:"Applicable to students pursuing diploma, degree or post-graduate courses in recognised institutes.",
+       source_ref:"Government Resolution, clause 4(b)"},
+      {field:"income",     operator:"lte",     value:800000,
+       source_text:"Annual family income of the applicant must not exceed ₹8,00,000.",
+       source_ref:"Government Resolution, clause 5"},
+      {field:"age",        operator:"between", value:[15,35],
+       source_text:"Applicant's age must be between 15 and 35 years.",
+       source_ref:"Scheme guidelines, eligibility"}
+    ],
+    documents:[
+      "Domicile certificate of Maharashtra",
+      "Income certificate / Tehsildar income proof",
+      "Bonafide certificate from the institute",
+      "Mark sheet of the last qualifying examination",
+      "Bank passbook (account in the student's name)",
+      "Aadhaar or accepted identity document"
+    ],
+    steps:[
+      "Open the MahaDBT portal (official application portal).",
+      "Register as a new applicant using your mobile number.",
+      "Complete Aadhaar-based e-KYC if prompted.",
+      "Select this scheme and upload the listed documents.",
+      "Submit and note the application ID for tracking."
+    ],
+    application_url:"https://mahadbt.maharashtra.gov.in/",
+    source_url:"https://mahadbt.maharashtra.gov.in/",
+    source_type:"Official state portal (MahaDBT)",
+    last_verified_date:"2026-09-11",
+    deadline:null,
+    datagov:null
+  },
+
+  {
+    id:"adip",
+    name:{
+      en:"Assistance to Disabled Persons for Purchase / Fitting of Aids and Appliances (ADIP)",
+      hi:"दिव्यांगजनों के लिए सहायक उपकरण क्रय / फिटिंग हेतु सहायता (एडीआईपी)",
+      te:"వికలాంగుల కోసం సహాయక పరికరాల కొనుగోలు / అమర్చడం సహాయం (ADIP)"
+    },
+    department:"Department of Empowerment of Persons with Disabilities (Divyangjan), Ministry of Social Justice & Empowerment",
+    jurisdiction:"All India",
+    level:"Central",
+    benefit:"Financial assistance towards the cost of aids and appliances such as wheelchairs, hearing aids, prostheses and assistive devices.",
+    rules:[
+      {field:"disability", operator:"equals", value:"yes",
+       source_text:"The applicant must be a person with disability holding a valid disability certificate.",
+       source_ref:"Scheme guidelines, eligibility"},
+      {field:"income",     operator:"lte",    value:500000,
+       source_text:"Assistance is provided subject to the income ceiling notified for the scheme.",
+       source_ref:"Scheme guidelines, income criteria"}
+    ],
+    documents:[
+      "Disability certificate / UDID card",
+      "Income certificate",
+      "Aadhaar or accepted identity document",
+      "Passport-size photograph",
+      "Bank account details"
+    ],
+    steps:[
+      "Visit the ADIP information page on the official department website.",
+      "Locate the nearest implementing agency or district centre.",
+      "Get the assessment done by the prescribed medical authority.",
+      "Submit the application with the required documents."
+    ],
+    application_url:"https://www.myscheme.gov.in/",
+    source_url:"https://www.myscheme.gov.in/",
+    source_type:"Official scheme page",
+    last_verified_date:"2026-09-11",
+    deadline:null,
+    datagov:{
+      title:"State/UT-wise beneficiaries assisted under ADIP",
+      resource_id:"",
+      catalog_url:"https://www.data.gov.in/keywords/adip"
+    }
+  },
+
+  {
+    id:"csss",
+    name:{
+      en:"Central Sector Scheme of Scholarship for College and University Students",
+      hi:"कॉलेज और विश्वविद्यालय के विद्यार्थियों के लिए केंद्रीय क्षेत्र छात्रवृत्ति योजना",
+      te:"కళాశాల మరియు విశ్వవిద్యాలయ విద్యార్థుల కోసం కేంద్ర రంగ ఉపకార వేతన పథకం"
+    },
+    department:"Department of Higher Education, Ministry of Education",
+    jurisdiction:"All India",
+    level:"Central",
+    benefit:"Scholarship paid annually for the duration of the course, as notified in the scheme guidelines.",
+    rules:[
+      {field:"occupation", operator:"equals",  value:"student",
+       source_text:"Applicant must be a regular student pursuing a recognised course.",
+       source_ref:"Scheme guidelines, clause 2"},
+      {field:"education",  operator:"in",      value:["degree","pg"],
+       source_text:"Applicable to students pursuing graduate or post-graduate courses.",
+       source_ref:"Scheme guidelines, clause 3"},
+      {field:"income",     operator:"lte",     value:450000,
+       source_text:"Parental annual income must not exceed ₹4,50,000.",
+       source_ref:"Scheme guidelines, clause 4"},
+      {field:"age",        operator:"between", value:[18,25],
+       source_text:"Applicant must be between 18 and 25 years of age.",
+       source_ref:"Scheme guidelines, clause 5"},
+      {field:"already",    operator:"equals",  value:"no",
+       source_text:"Applicant must not be availing any other centrally funded scholarship for the same course.",
+       source_ref:"Scheme guidelines, clause 7"}
+    ],
+    documents:[
+      "Class 12 mark sheet",
+      "Income certificate of parent / guardian",
+      "Bonafide certificate from the college or university",
+      "Bank passbook (account in the student's name)",
+      "Aadhaar or accepted identity document"
+    ],
+    steps:[
+      "Open the National Scholarship Portal (NSP).",
+      "Register as a fresh applicant and verify your mobile number.",
+      "Fill the academic and bank details sections.",
+      "Upload the listed documents and submit.",
+      "Track the status using your application ID."
+    ],
+    application_url:"https://scholarships.gov.in/",
+    source_url:"https://scholarships.gov.in/",
+    source_type:"National Scholarship Portal",
+    last_verified_date:"2026-09-11",
+    deadline:null,
+    datagov:null
+  },
+
+  {
+    id:"pms_dis",
+    name:{
+      en:"Post-Matric Scholarship for Students with Disabilities",
+      hi:"दिव्यांग विद्यार्थियों के लिए पोस्ट-मैट्रिक छात्रवृत्ति",
+      te:"వికలాంగ విద్యార్థుల కోసం పోస్ట్-మెట్రిక్ ఉపకార వేతనం"
+    },
+    department:"Department of Empowerment of Persons with Disabilities (Divyangjan), Ministry of Social Justice & Empowerment",
+    jurisdiction:"All India",
+    level:"Central",
+    benefit:"Maintenance allowance, book grant and tuition fee support as specified in the official scheme guidelines.",
+    rules:[
+      {field:"disability",     operator:"equals", value:"yes",
+       source_text:"Applicant must be a student with disability.",
+       source_ref:"Scheme guidelines, clause 2.1"},
+      {field:"disability_pct", operator:"gte",    value:40,
+       source_text:"The disability must be 40% or more, certified by a competent authority.",
+       source_ref:"Scheme guidelines, clause 2.1"},
+      {field:"income",         operator:"lte",    value:250000,
+       source_text:"Annual family income must not exceed ₹2,50,000.",
+       source_ref:"Scheme guidelines, clause 2.3"},
+      {field:"education",      operator:"in",     value:["edu12","iti","diploma","degree","pg"],
+       source_text:"Applicant must be studying in a post-matriculation course (Class 11 and above).",
+       source_ref:"Scheme guidelines, clause 2.2"}
+    ],
+    documents:[
+      "Disability certificate / UDID card",
+      "Income certificate",
+      "Bonafide certificate from the institute",
+      "Mark sheet of the last qualifying examination",
+      "Bank passbook (account in the student's name)"
+    ],
+    steps:[
+      "Open the National Scholarship Portal (NSP).",
+      "Register and select the post-matric disability scholarship.",
+      "Upload the disability certificate and income proof.",
+      "Submit the application before the notified closing date.",
+      "Follow up with the institute nodal officer for verification."
+    ],
+    application_url:"https://scholarships.gov.in/",
+    source_url:"https://scholarships.gov.in/",
+    source_type:"National Scholarship Portal",
+    last_verified_date:"2026-09-11",
+    deadline:null,
+    datagov:null
+  },
+
+  {
+    id:"igndps",
+    name:{
+      en:"Indira Gandhi National Disability Pension Scheme (IGNDPS)",
+      hi:"इंदिरा गांधी राष्ट्रीय दिव्यांगजन पेंशन योजना",
+      te:"ఇందిరా గాంధీ జాతీయ వికలాంగుల పింఛను పథకం"
+    },
+    department:"Ministry of Rural Development (implemented through State Social Welfare Departments)",
+    jurisdiction:"All India",
+    level:"Central",
+    benefit:"Monthly pension credited to the beneficiary's bank or post-office account, as notified.",
+    rules:[
+      {field:"age",            operator:"between", value:[18,79],
+       source_text:"Applicant must be between 18 and 79 years of age.",
+       source_ref:"Scheme guidelines, eligibility"},
+      {field:"disability",     operator:"equals",  value:"yes",
+       source_text:"Applicant must be a person with disability.",
+       source_ref:"Scheme guidelines, eligibility"},
+      {field:"disability_pct", operator:"gte",     value:80,
+       source_text:"Applicant must have severe or multiple disability (80% or more).",
+       source_ref:"Scheme guidelines, eligibility"},
+      {field:"income",         operator:"lte",     value:21000,
+       source_text:"Applicant must belong to a household below the poverty line as per the prescribed criteria.",
+       source_ref:"Scheme guidelines, income criteria"}
+    ],
+    documents:[
+      "Disability certificate with percentage (80% or more)",
+      "BPL / income certificate",
+      "Age proof",
+      "Bank or post-office account passbook",
+      "Aadhaar or accepted identity document"
+    ],
+    steps:[
+      "Contact the Gram Panchayat, Block office or District Social Welfare Office.",
+      "Collect and fill the pension application form.",
+      "Attach the disability and income certificates.",
+      "Submit the form and obtain an acknowledgement."
+    ],
+    application_url:"https://nsap.nic.in/",
+    source_url:"https://nsap.nic.in/",
+    source_type:"National Social Assistance Programme portal",
+    last_verified_date:"2026-09-11",
+    deadline:null,
+    datagov:{
+      title:"State/UT-wise beneficiaries under NSAP (incl. disability pension)",
+      resource_id:"",
+      catalog_url:"https://www.data.gov.in/keywords/nsap"
+    }
+  },
+
+  {
+    id:"sgnay",
+    name:{
+      en:"Sanjay Gandhi Niradhar Anudan Yojana",
+      hi:"संजय गांधी निराधार अनुदान योजना",
+      te:"సంజయ్ గాంధీ నిరాధార అనుదాన్ యోజన"
+    },
+    department:"Women and Child Development Department, Government of Maharashtra",
+    jurisdiction:"Maharashtra",
+    level:"State",
+    benefit:"Monthly financial assistance to destitute and eligible persons as notified by the State Government.",
+    rules:[
+      {field:"state",   operator:"equals",  value:"MH",
+       source_text:"The applicant must be a resident of Maharashtra.",
+       source_ref:"Government Resolution, clause 2"},
+      {field:"age",     operator:"between", value:[18,65],
+       source_text:"Applicant must be between 18 and 65 years of age.",
+       source_ref:"Government Resolution, clause 3"},
+      {field:"income",  operator:"lte",     value:21000,
+       source_text:"Annual family income of the applicant must not exceed ₹21,000.",
+       source_ref:"Government Resolution, clause 4"},
+      {field:"already", operator:"equals",  value:"no",
+       source_text:"Applicant must not already be receiving a similar pension or assistance from any government source.",
+       source_ref:"Government Resolution, clause 6"}
+    ],
+    documents:[
+      "Income certificate",
+      "Domicile / residence proof of Maharashtra",
+      "Age proof",
+      "Bank passbook",
+      "Aadhaar or accepted identity document"
+    ],
+    steps:[
+      "Visit the nearest Setu Kendra / Common Service Centre.",
+      "Fill the application form for the scheme.",
+      "Attach the income and residence documents.",
+      "Submit and collect the acknowledgement receipt."
+    ],
+    application_url:"https://aaplesarkar.mahaonline.gov.in/",
+    source_url:"https://aaplesarkar.mahaonline.gov.in/",
+    source_type:"Aaple Sarkar portal, Government of Maharashtra",
+    last_verified_date:"2026-09-11",
+    deadline:null,
+    datagov:null
+  },
+
+  {
+    id:"pmkisan",
+    name:{
+      en:"Pradhan Mantri Kisan Samman Nidhi (PM-KISAN)",
+      hi:"प्रधानमंत्री किसान सम्मान निधि (पीएम-किसान)",
+      te:"ప్రధాన మంత్రి కిసాన్ సమ్మాన్ నిధి (PM-KISAN)"
+    },
+    department:"Department of Agriculture and Farmers Welfare, Ministry of Agriculture & Farmers Welfare",
+    jurisdiction:"All India",
+    level:"Central",
+    benefit:"Income support paid in instalments directly to the bank account of eligible landholding farmer families.",
+    rules:[
+      {field:"occupation",  operator:"equals", value:"farmer",
+       source_text:"Applicant must be a landholding farmer family.",
+       source_ref:"Scheme guidelines, eligibility"},
+      {field:"age",         operator:"gte",    value:18,
+       source_text:"Applicant must be an adult member of the farmer family.",
+       source_ref:"Scheme guidelines, eligibility"},
+      {field:"landholding", operator:"gte",    value:0.01,
+       source_text:"The family must hold cultivable land as per the land records.",
+       source_ref:"Scheme guidelines, land records condition"}
+    ],
+    documents:[
+      "Land record / 7-12 extract or equivalent",
+      "Aadhaar or accepted identity document",
+      "Bank passbook",
+      "Mobile number linked for OTP verification"
+    ],
+    steps:[
+      "Open the official PM-KISAN portal.",
+      "Use the 'New Farmer Registration' option.",
+      "Enter Aadhaar and land record details.",
+      "Submit and complete verification through the local agriculture office."
+    ],
+    application_url:"https://pmkisan.gov.in/",
+    source_url:"https://pmkisan.gov.in/",
+    source_type:"Official PM-KISAN portal",
+    last_verified_date:"2026-09-11",
+    deadline:null,
+    datagov:{
+      title:"State/UT-wise beneficiaries paid under PM-KISAN",
+      resource_id:"",
+      catalog_url:"https://www.data.gov.in/keywords/pm-kisan"
+    }
+  },
+
+  {
+    id:"ladki",
+    name:{
+      en:"Mukhyamantri Majhi Ladki Bahin Yojana",
+      hi:"मुख्यमंत्री माझी लाडकी बहीण योजना",
+      te:"ముఖ్యమంత్రి మాఝీ లడ్కీ బహిణ్ యోజన"
+    },
+    department:"Women and Child Development Department, Government of Maharashtra",
+    jurisdiction:"Maharashtra",
+    level:"State",
+    benefit:"Monthly financial assistance transferred to the bank account of eligible women beneficiaries.",
+    rules:[
+      {field:"state",  operator:"equals",  value:"MH",
+       source_text:"Applicant must be a resident woman of Maharashtra.",
+       source_ref:"Government Resolution, eligibility clause"},
+      {field:"gender", operator:"equals",  value:"female",
+       source_text:"The scheme is applicable to women applicants only.",
+       source_ref:"Government Resolution, eligibility clause"},
+      {field:"age",    operator:"between", value:[21,65],
+       source_text:"Applicant's age must be between 21 and 65 years.",
+       source_ref:"Government Resolution, eligibility clause"},
+      {field:"income", operator:"lte",     value:250000,
+       source_text:"Annual family income must not exceed ₹2,50,000.",
+       source_ref:"Government Resolution, income criteria"}
+    ],
+    documents:[
+      "Aadhaar or accepted identity document",
+      "Domicile certificate of Maharashtra",
+      "Income certificate / ration card",
+      "Bank passbook (account in the applicant's name)",
+      "Passport-size photograph"
+    ],
+    steps:[
+      "Open the official state scheme portal or visit a Setu Kendra.",
+      "Register with your mobile number and Aadhaar.",
+      "Upload the listed documents.",
+      "Submit and note the acknowledgement number."
+    ],
+    application_url:"https://ladakibahin.maharashtra.gov.in/",
+    source_url:"https://ladakibahin.maharashtra.gov.in/",
+    source_type:"Official state scheme portal",
+    last_verified_date:"2026-09-11",
+    deadline:null,
+    datagov:null
+  }
+];
+
+/* =====================================================================
+   4. STATE + HELPERS
+   ===================================================================== */
+const state = { lang:"en", profile:{}, report:null, apiKey:"", searchKey:"", searchCx:"", savedProfiles:{} };
+const DATAGOV_BASE = "https://api.data.gov.in/resource/";
+const GSEARCH_BASE = "https://www.googleapis.com/customsearch/v1";
+const statsCache = {}; // resource_id -> parsed result (per session, avoids refetching)
+const searchCache = {}; // schemeId -> parsed result (per session, avoids refetching)
+const PROFILES_KEY = "schemesaarthi_saved_profiles_v1";
+const LOCALE = { en:"en-IN", hi:"hi-IN", te:"te-IN" };
+
+/* ---------- saved profiles (persisted in this browser only) ---------- */
+function loadSavedProfiles(){
+  try{
+    const raw = localStorage.getItem(PROFILES_KEY);
+    return raw ? JSON.parse(raw) : {};
+  }catch(e){ return {}; }
+}
+function persistSavedProfiles(){
+  try{ localStorage.setItem(PROFILES_KEY, JSON.stringify(state.savedProfiles)); }catch(e){ /* storage unavailable — ignore */ }
+}
+state.savedProfiles = loadSavedProfiles();
+
+function esc(s){
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function fieldLabel(key, lang){
+  const f = FIELD_LABELS[key];
+  return f ? (f[lang] || f.en) : key;
+}
+function optionLabel(fieldKey, value, lang){
+  if (fieldKey === "district") return value === "ALL" ? T[lang].allDistricts : (value || null);
+  const opts = OPTIONS[fieldKey];
+  if (!opts) return null;
+  const o = opts.find(x => String(x.v) === String(value));
+  return o ? (o[lang] || o.en) : null;
+}
+function displayValue(fieldKey, value, lang){
+  if (value === "" || value === undefined || value === null) return "";
+  const fromOpts = optionLabel(fieldKey, value, lang);
+  if (fromOpts) return fromOpts;
+  if (fieldKey === "income") return "₹" + Number(value).toLocaleString("en-IN");
+  return String(value);
+}
+function formatDate(iso, lang){
+  try{
+    return new Date(iso + "T00:00:00").toLocaleDateString(LOCALE[lang] || "en-IN",
+      { day:"numeric", month:"long", year:"numeric" });
+  }catch(e){ return iso; }
+}
+
+/* =====================================================================
+   3b. DATA.GOV.IN LIVE STATS (Open Government Data Platform India)
+   Real endpoint pattern: https://api.data.gov.in/resource/{resource_id}
+     ?api-key=YOUR_KEY&format=json&limit=5
+   Each SCHEMES[i].datagov (when not null) points at a real dataset on
+   data.gov.in that is relevant to that scheme. resource_id must be filled
+   in by the site owner (see the API key dialog for how to get a key and
+   find resource IDs) — we never fabricate a resource_id.
+   ===================================================================== */
+async function fetchDatagovStats(resourceId, apiKey){
+  if (statsCache[resourceId]) return statsCache[resourceId];
+  const url = `${DATAGOV_BASE}${encodeURIComponent(resourceId)}`
+    + `?api-key=${encodeURIComponent(apiKey)}&format=json&limit=6`;
+  const res = await fetch(url, { headers: { "Accept": "application/json" } });
+  if (!res.ok) throw new Error("HTTP " + res.status);
+  const data = await res.json();
+  statsCache[resourceId] = data;
+  return data;
+}
+
+function renderStatsRows(json){
+  const records = Array.isArray(json.records) ? json.records : [];
+  if (!records.length) return "";
+  // Show the first record's fields as label/value rows — datasets on
+  // data.gov.in do not share a common schema, so this stays generic.
+  const first = records[0];
+  const keys = Object.keys(first).filter(k => k !== "_id" && k !== "sl__no_" && k !== "sl_no");
+  return keys.slice(0, 8).map(k => {
+    const label = k.replace(/_+/g, " ").replace(/\s+/g, " ").trim();
+    return `<div class="statsrow"><span>${esc(label)}</span><b>${esc(first[k])}</b></div>`;
+  }).join("");
+}
+
+async function loadStatsPanel(schemeId, resourceId, container, lang){
+  container.innerHTML = `<p class="stats-loading"><span class="spin"></span>${esc(T[lang].statsLoading)}</p>`;
+  try{
+    const json = await fetchDatagovStats(resourceId, state.apiKey);
+    const rows = renderStatsRows(json);
+    container.innerHTML = rows
+      ? `${rows}<p class="stats-note">${esc(T[lang].statsTitle)} · ${esc(T[lang].statsSource)}: api.data.gov.in/resource/${esc(resourceId)}</p>`
+      : `<p class="stats-empty">${esc(T[lang].statsErrorGeneric)}</p>`;
+  }catch(err){
+    container.innerHTML = `<p class="stats-error">⚠ ${esc(T[lang].statsErrorGeneric)}</p>`;
+  }
+}
+
+function statsPanelHtml(scheme, lang){
+  const dg = scheme.datagov;
+  const panelId = `stats_${scheme.id}`;
+  if (!dg){
+    return ""; // no matching official dataset for this scheme — say nothing rather than guess
+  }
+  let body;
+  if (!state.apiKey){
+    body = `<p class="stats-cta">${esc(T[lang].statsNoKey)} <button type="button" class="stats-connect-link" data-open-key="1">${esc(T[lang].statsConnectBtn)}</button></p>`;
+  } else if (!dg.resource_id){
+    body = `<p class="stats-empty">${esc(T[lang].statsErrorNoResource)}
+      ${dg.catalog_url ? `<br><a href="${esc(dg.catalog_url)}" target="_blank" rel="noopener">${esc(dg.title)} ↗</a>` : ""}</p>`;
+  } else {
+    body = `<p class="stats-loading"><span class="spin"></span>${esc(T[lang].statsLoading)}</p>`;
+  }
+  return `<div class="statspanel" id="${panelId}" data-scheme="${esc(scheme.id)}">
+      <div class="stitle">${esc(dg.title || T[lang].statsTitle)}</div>
+      ${body}
+    </div>`;
+}
+
+function wireStatsPanels(){
+  document.querySelectorAll(".statspanel").forEach(panel => {
+    const schemeId = panel.dataset.scheme;
+    const scheme = SCHEMES.find(s => s.id === schemeId);
+    if (!scheme || !scheme.datagov) return;
+    const connectBtn = panel.querySelector("[data-open-key]");
+    if (connectBtn){
+      connectBtn.addEventListener("click", () => document.getElementById("apiKeyDialog").showModal());
+    }
+    if (state.apiKey && scheme.datagov.resource_id){
+      loadStatsPanel(scheme.id, scheme.datagov.resource_id, panel, state.lang);
+    }
+  });
+  wireSearchPanels();
+}
+
+/* =====================================================================
+   3c. LIVE WEB SEARCH (Google Programmable Search JSON API)
+   Real endpoint pattern: https://www.googleapis.com/customsearch/v1
+     ?key=YOUR_KEY&cx=YOUR_SEARCH_ENGINE_ID&q=...
+   Free tier: ~100 queries/day. The person supplies their own key + cx,
+   so results are only fetched when they explicitly press "Search now" —
+   this app never calls the API on their behalf without a click.
+   ===================================================================== */
+function searchQueryFor(scheme){
+  return `${scheme.name.en} ${scheme.jurisdiction} scheme eligibility latest update`;
+}
+
+async function fetchWebSearch(query, apiKey, cx){
+  const url = `${GSEARCH_BASE}?key=${encodeURIComponent(apiKey)}&cx=${encodeURIComponent(cx)}`
+    + `&q=${encodeURIComponent(query)}&num=5`;
+  const res = await fetch(url, { headers: { "Accept": "application/json" } });
+  if (!res.ok) throw new Error("HTTP " + res.status);
+  const data = await res.json();
+  if (data.error) throw new Error(data.error.message || "API error");
+  return data;
+}
+
+function renderSearchResults(json, lang){
+  const items = Array.isArray(json.items) ? json.items.slice(0, 4) : [];
+  if (!items.length) return "";
+  return items.map(it => `
+    <div class="searchresult">
+      <a href="${esc(it.link)}" target="_blank" rel="noopener">${esc(it.title || it.link)}</a>
+      <p>${esc(it.snippet || "")}</p>
+    </div>`).join("");
+}
+
+async function runWebSearch(schemeId){
+  const scheme = SCHEMES.find(s => s.id === schemeId);
+  const panel = document.getElementById(`search_${schemeId}`);
+  const lang = state.lang;
+  if (!scheme || !panel) return;
+  panel.innerHTML = `<div class="stitle">🌐 ${esc(T[lang].secWebSearch)}</div>
+    <p class="stats-loading"><span class="spin"></span>${esc(T[lang].webSearchLoading)}</p>`;
+  try{
+    const cacheKey = schemeId + "::" + lang;
+    let json = searchCache[cacheKey];
+    if (!json){
+      json = await fetchWebSearch(searchQueryFor(scheme), state.searchKey, state.searchCx);
+      searchCache[cacheKey] = json;
+    }
+    const rows = renderSearchResults(json, lang);
+    panel.innerHTML = `<div class="stitle">🌐 ${esc(T[lang].secWebSearch)}</div>
+      ${rows || `<p class="stats-empty">${esc(T[lang].webSearchEmpty)}</p>`}
+      <p class="stats-note">${esc(T[lang].webSearchNote)}</p>`;
+  }catch(err){
+    panel.innerHTML = `<div class="stitle">🌐 ${esc(T[lang].secWebSearch)}</div>
+      <p class="stats-error">⚠ ${esc(T[lang].webSearchErrorGeneric)}</p>`;
+  }
+}
+
+function searchPanelHtml(scheme, lang){
+  const panelId = `search_${scheme.id}`;
+  let body;
+  if (!state.searchKey || !state.searchCx){
+    body = `<p class="stats-cta">${esc(T[lang].webSearchNoKey)} <button type="button" class="stats-connect-link" data-open-search-key="1">${esc(T[lang].webSearchConnectBtn)}</button></p>`;
+  } else {
+    body = `<p class="stats-cta">${esc(T[lang].webSearchCta)} <button type="button" class="stats-connect-link" data-run-search="${esc(scheme.id)}">${esc(T[lang].webSearchBtn)}</button></p>`;
+  }
+  return `<div class="statspanel" id="${panelId}" data-scheme="${esc(scheme.id)}">
+      <div class="stitle">🌐 ${esc(T[lang].secWebSearch)}</div>
+      ${body}
+    </div>`;
+}
+
+function wireSearchPanels(){
+  document.querySelectorAll(".statspanel[id^='search_']").forEach(panel => {
+    const openBtn = panel.querySelector("[data-open-search-key]");
+    if (openBtn){
+      openBtn.addEventListener("click", () => document.getElementById("apiKeyDialog").showModal());
+    }
+    const runBtn = panel.querySelector("[data-run-search]");
+    if (runBtn){
+      runBtn.addEventListener("click", () => runWebSearch(runBtn.dataset.runSearch));
+    }
+  });
+}
+
+
+/* ---------- deterministic rule engine ---------- */
+function evalRule(rule, p){
+  const v = p[rule.field];
+  if (v === undefined || v === null || v === "") return "unknown";
+  if ((rule.field === "state" || rule.field === "district") && v === "ALL") return "unknown";
+  const op = rule.operator;
+
+  if (op === "equals")  return String(v) === String(rule.value) ? "pass" : "fail";
+  if (op === "in")      return rule.value.map(String).includes(String(v)) ? "pass" : "fail";
+  if (op === "between"){
+    const n = Number(v);
+    if (isNaN(n)) return "unknown";
+    return (n >= rule.value[0] && n <= rule.value[1]) ? "pass" : "fail";
+  }
+  const n = Number(v), rv = Number(rule.value);
+  if (isNaN(n) || isNaN(rv)) return "unknown";
+  switch(op){
+    case "lte": return n <= rv ? "pass" : "fail";
+    case "gte": return n >= rv ? "pass" : "fail";
+    case "lt":  return n <  rv ? "pass" : "fail";
+    case "gt":  return n >  rv ? "pass" : "fail";
+  }
+  return "unknown";
+}
+
+function evaluate(scheme, profile){
+  const results = scheme.rules.map(rule => ({ rule, status: evalRule(rule, profile) }));
+  const passes   = results.filter(r => r.status === "pass").length;
+  const fails    = results.filter(r => r.status === "fail").length;
+  const unknowns = results.filter(r => r.status === "unknown").length;
+  let verdict;
+  if (fails > 0)        verdict = "not_eligible";
+  else if (unknowns > 0) verdict = "possibly";
+  else                   verdict = "likely";
+  return { results, verdict, passes, fails, unknowns, total: results.length };
+}
+
+function computeReport(){
+  const rows = SCHEMES.map(s => ({ scheme:s, ev: evaluate(s, state.profile) }));
+  const rank = { likely:0, possibly:1, not_eligible:2 };
+  rows.sort((a,b) =>
+    (rank[a.ev.verdict] - rank[b.ev.verdict]) ||
+    (b.ev.passes - a.ev.passes)
+  );
+  return rows;
+}
+
+/* =====================================================================
+   5. FORM
+   ===================================================================== */
+function readForm(){
+  const form = document.getElementById("profileForm");
+  if (!form) return {};
+  const fd = new FormData(form);
+  const p = {};
+  for (const [k, v] of fd.entries()) p[k] = typeof v === "string" ? v.trim() : v;
+  ["age","income","disability_pct","landholding"].forEach(k => {
+    if (p[k] === undefined || p[k] === "") p[k] = "";
+    else p[k] = Number(p[k]);
+  });
+  return p;
+}
+
+function renderForm(){
+  const lang = state.lang;
+  const p = state.profile;
+  const grid = document.getElementById("formGrid");
+  if (!grid) return;
+
+  grid.innerHTML = FIELDS.map(f => {
+    const label = fieldLabel(f.key, lang);
+    const val = (p[f.key] === undefined || p[f.key] === null) ? "" : p[f.key];
+    let input;
+    const icon = f.icon ? `<span class="ficon" aria-hidden="true">${f.icon}</span>` : "";
+
+    if (f.key === "district"){
+      const stateVal = p.state || "";
+      const isAllStates = stateVal === "ALL";
+      const districtList = isAllStates ? [] : (DISTRICTS[stateVal] || []);
+      const allDistrictsLabel = T[lang].allDistricts;
+      const opts = districtList.map(d =>
+        `<option value="${esc(d)}" ${String(val) === String(d) ? "selected" : ""}>${esc(d)}</option>`
+      ).join("");
+      const disabled = !stateVal ? "disabled" : "";
+      let firstOption;
+      if (!stateVal){
+        firstOption = `<option value="">${esc(T[lang].selectStateFirst)}</option>`;
+      } else {
+        firstOption = `<option value="ALL" ${val === "ALL" ? "selected" : ""}>${esc(allDistrictsLabel)}</option>`;
+      }
+      input = `<select name="${f.key}" id="f_${f.key}" ${disabled}>
+                 ${firstOption}${opts}
+               </select>`;
+    } else if (f.type === "select"){
+      const opts = OPTIONS[f.options].map(o =>
+        `<option value="${o.v}" ${String(val) === String(o.v) ? "selected" : ""}>${esc(o[lang] || o.en)}</option>`
+      ).join("");
+      input = `<select name="${f.key}" id="f_${f.key}">
+                 <option value="">${esc(T[lang].select)}</option>${opts}
+               </select>`;
+    } else {
+      input = `<input type="${f.type}" name="${f.key}" id="f_${f.key}"
+                 value="${esc(val)}"
+                 ${f.min !== undefined ? `min="${f.min}"` : ""}
+                 ${f.max !== undefined ? `max="${f.max}"` : ""}
+                 ${f.step ? `step="${f.step}"` : ""}
+                 placeholder="${f.ph || ""}"
+                 inputmode="${f.type === "number" ? "numeric" : "text"}">`;
+    }
+    return `<div class="field field-${f.key}"><label for="f_${f.key}">${icon}${esc(label)}</label>${input}</div>`;
+  }).join("");
+
+  const stateSelect = document.getElementById("f_state");
+  if (stateSelect){
+    stateSelect.addEventListener("change", () => {
+      state.profile = readForm();
+      // ALL states has no district list, so default straight to "All Districts";
+      // any specific state clears district so the person re-picks from that state's list.
+      state.profile.district = state.profile.state === "ALL" ? "ALL" : "";
+      renderForm();
+    });
+  }
+}
+
+/* =====================================================================
+   6. RESULTS RENDERING
+   ===================================================================== */
+function condRow(r, lang){
+  const icon = r.status === "pass" ? "✓" : r.status === "fail" ? "✕" : "?";
+  const userVal = displayValue(r.rule.field, state.profile[r.rule.field], lang) || T[lang].notAnswered;
+  return `<div class="cond ${r.status}">
+      <span class="cond-icon">${icon}</span>
+      <div class="cond-body">
+        <div class="cond-line">${esc(fieldLabel(r.rule.field, lang))} · ${esc(T[lang].youSaid)}: ${esc(userVal)}</div>
+        <div class="cond-req">${esc(r.rule.source_text)}</div>
+        <div class="cond-src">📄 ${esc(r.rule.source_ref)}</div>
+      </div>
+    </div>`;
+}
+
+function schemeCard(row, lang){
+  const s = row.scheme, ev = row.ev;
+  const name = s.name[lang] || s.name.en;
+
+  const badgeCls = { likely:"b-likely", possibly:"b-possible", not_eligible:"b-not" }[ev.verdict];
+  const badgeTxt = { likely:T[lang].badgeLikely, possibly:T[lang].badgePossible, not_eligible:T[lang].badgeNot }[ev.verdict];
+
+  const conditions = ev.results.map(r => condRow(r, lang)).join("");
+
+  /* --- still to verify --- */
+  const unknowns = ev.results.filter(r => r.status === "unknown");
+  const verifyItems = unknowns.map(r =>
+    `<li><b>${esc(fieldLabel(r.rule.field, lang))}</b> — ${esc(T[lang].needThis)}<br>
+      <span style="color:var(--muted);font-size:12px">${esc(r.rule.source_text)}</span></li>`
+  );
+  if (!s.deadline) verifyItems.push(`<li>${esc(T[lang].windowNote)}</li>`);
+  const verifyBlock = verifyItems.length
+    ? `<ul class="plain">${verifyItems.join("")}</ul>`
+    : `<p class="note">${esc(T[lang].verifyNone)}</p>`;
+
+  /* --- documents --- */
+  const docs = s.documents.map(d =>
+    `<label class="chk"><input type="checkbox"><span>${esc(d)}</span></label>`
+  ).join("");
+
+  /* --- steps --- */
+  const steps = s.steps.map(x => `<li>${esc(x)}</li>`).join("");
+
+  /* --- why --- */
+  const whyRows = ev.results.map(r => `
+    <div class="why-row">
+      <div class="why-field">${esc(fieldLabel(r.rule.field, lang))}</div>
+      <div class="why-src">“${esc(r.rule.source_text)}”</div>
+      <div class="why-ref">📄 ${esc(r.rule.source_ref)} · ${esc(s.source_type)}</div>
+      <div class="why-json">${esc(JSON.stringify({ field:r.rule.field, operator:r.rule.operator, value:r.rule.value, result:r.status }, null, 0))}</div>
+    </div>`).join("");
+
+  return `
+  <article class="scheme ${ev.verdict === "not_eligible" ? "not" : ""}">
+    <div class="shead">
+      <h3 class="sname">${esc(name)}</h3>
+      <span class="badge ${badgeCls}">${esc(badgeTxt)}</span>
+    </div>
+    <p class="smeta"><b>${esc(s.department)}</b><br>${esc(s.jurisdiction)} · ${esc(s.level)}</p>
+    <p class="matchline">${esc(T[lang].matchedOf(ev.passes, ev.total))}</p>
+
+    <div class="sec">
+      <h4>${esc(T[lang].secWhy)}</h4>
+      ${conditions}
+    </div>
+
+    <div class="sec">
+      <h4>${esc(T[lang].secVerify)}</h4>
+      ${verifyBlock}
+    </div>
+
+    <div class="sec">
+      <h4>${esc(T[lang].secBenefits)}</h4>
+      <p style="margin:0;font-size:13.5px">${esc(s.benefit)}</p>
+      ${statsPanelHtml(s, lang)}
+    </div>
+
+    <div class="sec">
+      ${searchPanelHtml(s, lang)}
+    </div>
+
+    <div class="sec">
+      <h4>${esc(T[lang].secDocs)}</h4>
+      ${docs}
+      <p class="docs-note">${esc(T[lang].docsNote)}</p>
+    </div>
+
+    <div class="sec">
+      <h4>${esc(T[lang].secSteps)}</h4>
+      <ol class="steps">${steps}</ol>
+    </div>
+
+    <div class="sec">
+      <div class="sourcebox">
+        <div class="srow"><span>${esc(T[lang].source)}</span>
+          <b><a href="${esc(s.source_url)}" target="_blank" rel="noopener">${esc(s.source_type)} ↗</a></b></div>
+        <div class="srow"><span>${esc(T[lang].lastChecked)}</span>
+          <b>${esc(formatDate(s.last_verified_date, lang))}</b></div>
+        <div class="srow"><span>${esc(T[lang].deadline)}</span>
+          <b>${s.deadline ? esc(formatDate(s.deadline, lang)) : esc(T[lang].notSpecified)}</b></div>
+        <div class="srow"><span>${esc(T[lang].finalDecision)}</span>
+          <b>${esc(T[lang].deptDecides)}</b></div>
+      </div>
+      <div class="apply">
+        <a class="btn btn-primary" href="${esc(s.application_url)}" target="_blank" rel="noopener">${esc(T[lang].applyBtn)}</a>
+      </div>
+    </div>
+
+    <details class="why">
+      <summary>${esc(T[lang].whyBtn)}</summary>
+      <div class="why-body">
+        <p class="why-lead">${esc(T[lang].whyLead)}</p>
+        ${whyRows}
+      </div>
+    </details>
+  </article>`;
+}
+
+function group(title, rows, lang){
+  return `<section class="rgroup">
+      <h3 class="gtitle">${esc(title)} (${rows.length})</h3>
+      ${rows.map(r => schemeCard(r, lang)).join("")}
+    </section>`;
+}
+
+function renderResults(){
+  const lang = state.lang;
+  const box = document.getElementById("results");
+  if (!box) return;
+
+  if (!state.report){
+    box.innerHTML = `<div class="card empty">${esc(T[lang].noResults)}</div>`;
+    return;
+  }
+
+  const rows = state.report;
+  const likely   = rows.filter(r => r.ev.verdict === "likely");
+  const possible = rows.filter(r => r.ev.verdict === "possibly");
+  const notEl    = rows.filter(r => r.ev.verdict === "not_eligible");
+
+  let html = `
+    <div class="card">
+      <h2>${esc(T[lang].resultsTitle)}</h2>
+      <div class="counts">
+        <span class="cnt c-green">${likely.length} ${esc(T[lang].cntLikely)}</span>
+        <span class="cnt c-amber">${possible.length} ${esc(T[lang].cntPossible)}</span>
+        <span class="cnt c-red">${notEl.length} ${esc(T[lang].cntNot)}</span>
+      </div>
+      <p class="note">${esc(T[lang].trust)}</p>
+    </div>`;
+
+  if (likely.length)   html += group(T[lang].gLikely, likely, lang);
+  if (possible.length) html += group(T[lang].gPossible, possible, lang);
+  if (notEl.length){
+    html += `<details class="notwrap">
+        <summary>${esc(T[lang].gNot)} (${notEl.length})</summary>
+        ${notEl.map(r => schemeCard(r, lang)).join("")}
+      </details>`;
+  }
+
+  box.innerHTML = html;
+  wireStatsPanels();
+}
+
+/* =====================================================================
+   7. LANGUAGE
+   ===================================================================== */
+function applyLang(){
+  const lang = state.lang;
+  document.documentElement.lang = lang;
+
+  /* preserve whatever the user has typed */
+  const grid = document.getElementById("formGrid");
+  if (grid && grid.children.length){
+    Object.assign(state.profile, readForm());
+  }
+
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const v = T[lang][el.dataset.i18n];
+    if (typeof v === "string") el.textContent = v;
+  });
+
+  document.querySelectorAll("[data-i18n-ph]").forEach(el => {
+    const v = T[lang][el.dataset.i18nPh];
+    if (typeof v === "string") el.placeholder = v;
+  });
+
+  document.querySelectorAll(".langs button").forEach(b =>
+    b.classList.toggle("active", b.dataset.lang === lang)
+  );
+
+  renderForm();
+  renderResults();
+}
+
+/* =====================================================================
+   8. EVENTS
+   ===================================================================== */
+document.querySelectorAll(".langs button").forEach(btn => {
+  btn.addEventListener("click", () => {
+    state.lang = btn.dataset.lang;
+    applyLang();
+  });
+});
+
+document.getElementById("profileForm").addEventListener("submit", e => {
+  e.preventDefault();
+  state.profile = readForm();
+  state.report = computeReport();
+  renderResults();
+  document.getElementById("results").scrollIntoView({ behavior:"smooth", block:"start" });
+});
+
+document.getElementById("demoBtn").addEventListener("click", () => {
+  state.profile = {
+    age: 22,
+    state: "MH",
+    district: "Pune",
+    gender: "male",
+    income: 300000,
+    occupation: "student",
+    education: "degree",
+    category: "obc",
+    disability: "yes",
+    disability_pct: 60,
+    residence: "urban",
+    landholding: "",
+    already: ""            /* deliberately left blank → “Possibly eligible” demo */
+  };
+  renderForm();
+  state.report = computeReport();
+  renderResults();
+  document.getElementById("results").scrollIntoView({ behavior:"smooth", block:"start" });
+});
+
+document.getElementById("resetBtn").addEventListener("click", () => {
+  setTimeout(() => {
+    state.profile = {};
+    state.report = null;
+    renderForm();
+    renderResults();
+  }, 0);
+});
+
+/* ---------- connect live data dialog (data.gov.in + web search) ---------- */
+const apiKeyDialog = document.getElementById("apiKeyDialog");
+const apiKeyBtn = document.getElementById("apiKeyBtn");
+const apiKeyInput = document.getElementById("apiKeyInput");
+const searchKeyInput = document.getElementById("searchKeyInput");
+const searchCxInput = document.getElementById("searchCxInput");
+
+function refreshKeyBtnState(){
+  apiKeyBtn.classList.toggle("connected", !!(state.apiKey || (state.searchKey && state.searchCx)));
+}
+
+apiKeyBtn.addEventListener("click", () => {
+  apiKeyInput.value = state.apiKey || "";
+  searchKeyInput.value = state.searchKey || "";
+  searchCxInput.value = state.searchCx || "";
+  apiKeyDialog.showModal();
+});
+
+document.getElementById("apiKeyClose").addEventListener("click", () => apiKeyDialog.close());
+
+document.getElementById("apiKeySave").addEventListener("click", (e) => {
+  e.preventDefault();
+  state.apiKey = apiKeyInput.value.trim();
+  state.searchKey = searchKeyInput.value.trim();
+  state.searchCx = searchCxInput.value.trim();
+  refreshKeyBtnState();
+  apiKeyDialog.close();
+  wireStatsPanels(); // retry any panels waiting on a key, without a full re-render
+});
+
+document.getElementById("apiKeyClear").addEventListener("click", () => {
+  state.apiKey = "";
+  state.searchKey = "";
+  state.searchCx = "";
+  apiKeyInput.value = "";
+  searchKeyInput.value = "";
+  searchCxInput.value = "";
+  refreshKeyBtnState();
+  renderResults(); // panels revert to the "connect" prompt
+});
+
+apiKeyDialog.addEventListener("click", (e) => {
+  if (e.target === apiKeyDialog) apiKeyDialog.close(); // click outside closes it
+});
+
+/* ---------- saved profiles dialog ---------- */
+const profilesDialog = document.getElementById("profilesDialog");
+const profilesBtn = document.getElementById("profilesBtn");
+const profileNameInput = document.getElementById("profileNameInput");
+const profilesList = document.getElementById("profilesList");
+
+function renderProfilesList(){
+  const lang = state.lang;
+  const names = Object.keys(state.savedProfiles);
+  if (!names.length){
+    profilesList.innerHTML = `<p class="note">${esc(T[lang].profileEmptyList)}</p>`;
+    return;
+  }
+  profilesList.innerHTML = names.map(name => {
+    const saved = state.savedProfiles[name];
+    let meta = T[lang].profileSavedNote;
+    if (saved.__savedAt){
+      try{ meta += " · " + formatDate(saved.__savedAt.slice(0,10), lang); }catch(e){}
+    }
+    return `<div class="profile-row">
+        <div>
+          <div class="profile-name">${esc(name)}</div>
+          <div class="profile-meta">${esc(meta)}</div>
+        </div>
+        <div class="profile-actions">
+          <button type="button" class="btn btn-ghost btn-sm" data-load-profile="${esc(name)}">${esc(T[lang].profileLoadBtn)}</button>
+          <button type="button" class="btn btn-ghost btn-sm danger" data-delete-profile="${esc(name)}">${esc(T[lang].profileDeleteBtn)}</button>
+        </div>
+      </div>`;
+  }).join("");
+}
+
+profilesBtn.addEventListener("click", () => {
+  profileNameInput.value = "";
+  renderProfilesList();
+  profilesDialog.showModal();
+});
+
+document.getElementById("profilesClose").addEventListener("click", () => profilesDialog.close());
+
+document.getElementById("profileSaveBtn").addEventListener("click", (e) => {
+  e.preventDefault();
+  const name = profileNameInput.value.trim();
+  if (!name){ profileNameInput.focus(); return; }
+  state.profile = readForm();
+  state.savedProfiles[name] = Object.assign({}, state.profile, { __savedAt: new Date().toISOString() });
+  persistSavedProfiles();
+  profileNameInput.value = "";
+  renderProfilesList();
+});
+
+profilesList.addEventListener("click", (e) => {
+  const loadBtn = e.target.closest("[data-load-profile]");
+  const delBtn = e.target.closest("[data-delete-profile]");
+  if (loadBtn){
+    const saved = state.savedProfiles[loadBtn.dataset.loadProfile];
+    if (!saved) return;
+    const p = Object.assign({}, saved);
+    delete p.__savedAt;
+    state.profile = p;
+    renderForm();
+    state.report = computeReport();
+    renderResults();
+    profilesDialog.close();
+    document.getElementById("results").scrollIntoView({ behavior:"smooth", block:"start" });
+  } else if (delBtn){
+    const name = delBtn.dataset.deleteProfile;
+    if (confirm(T[state.lang].profileConfirmDelete)){
+      delete state.savedProfiles[name];
+      persistSavedProfiles();
+      renderProfilesList();
+    }
+  }
+});
+
+profilesDialog.addEventListener("click", (e) => {
+  if (e.target === profilesDialog) profilesDialog.close();
+});
+
+/* =====================================================================
+   9. BOOT
+   ===================================================================== */
+applyLang();
+</script>
+</body>
+</html>
